@@ -43,6 +43,26 @@
             border-bottom: 1px solid var(--border-color);
         }
 
+        .chart-info {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.85em;
+        }
+
+        .chart-info-title {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .chart-info-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
         h1 {
             font-size: 2em;
             margin-bottom: 5px;
@@ -131,6 +151,16 @@
             </div>
             <button class="back-btn" onclick="goBack()">← Kembali</button>
         </header>
+
+        <div class="chart-info">
+            <div class="chart-info-title">📊 Indikator Teknikal Tersedia:</div>
+            <div class="chart-info-content">
+                🎯 <strong>Bollinger Bands (Chaos Bands)</strong> - Channel untuk identifikasi overbought/oversold<br>
+                📈 <strong>RSI</strong> - Relative Strength Index untuk momentum<br>
+                📉 <strong>MACD</strong> - Moving Average Convergence Divergence untuk trend<br>
+                🔄 <strong>Stochastic RSI</strong> - Kombinasi Stochastic dan RSI untuk entry/exit signal
+            </div>
+        </div>
 
         <div class="chart-container">
             <div id="tradingview_chart" style="height: 500px; width: 100%;"></div>
@@ -247,7 +277,7 @@
             // Wait for TradingView to be available
             if (typeof TradingView !== 'undefined') {
                 try {
-                    // Create TradingView chart widget
+                    // Create TradingView chart widget with Fractal Chaos Band and indicators
                     new TradingView.widget({
                         "autosize": true,
                         "symbol": symbol,
@@ -259,7 +289,18 @@
                         "toolbar_bg": "#f1f3f6",
                         "enable_publishing": false,
                         "allow_symbol_change": false,
-                        "container_id": "tradingview_chart"
+                        "container_id": "tradingview_chart",
+                        "studies": [
+                            "BB@tv-basicstudies",
+                            "RSI@tv-basicstudies",
+                            "MACD@tv-basicstudies",
+                            "StochasticRSI@tv-basicstudies"
+                        ],
+                        "overrides": {
+                            "mainSeriesProperties.showCountdown": true,
+                            "scalesProperties.showLeftScale": true,
+                            "scalesProperties.showRightScale": true
+                        }
                     });
                 } catch (error) {
                     console.error('Error loading TradingView widget:', error);
