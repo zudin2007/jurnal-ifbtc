@@ -153,12 +153,9 @@
         </header>
 
         <div class="chart-info">
-            <div class="chart-info-title">📊 Indikator Teknikal Tersedia:</div>
+            <div class="chart-info-title">📊 Indikator Teknikal:</div>
             <div class="chart-info-content">
-                🎯 <strong>Bollinger Bands (Chaos Bands)</strong> - Channel untuk identifikasi overbought/oversold<br>
-                📈 <strong>RSI</strong> - Relative Strength Index untuk momentum<br>
-                📉 <strong>MACD</strong> - Moving Average Convergence Divergence untuk trend<br>
-                🔄 <strong>Stochastic RSI</strong> - Kombinasi Stochastic dan RSI untuk entry/exit signal
+                📈 <strong>RSI (Relative Strength Index)</strong> - Mengukur momentum dan strength. Zona overbought >70, oversold <30
             </div>
         </div>
 
@@ -277,7 +274,7 @@
             // Wait for TradingView to be available
             if (typeof TradingView !== 'undefined') {
                 try {
-                    // Create TradingView chart widget with Fractal Chaos Band and indicators
+                    // Create TradingView chart widget with RSI indicator
                     new TradingView.widget({
                         "autosize": true,
                         "symbol": symbol,
@@ -291,10 +288,7 @@
                         "allow_symbol_change": false,
                         "container_id": "tradingview_chart",
                         "studies": [
-                            "BB@tv-basicstudies",
-                            "RSI@tv-basicstudies",
-                            "MACD@tv-basicstudies",
-                            "StochasticRSI@tv-basicstudies"
+                            "RSI@tv-basicstudies"
                         ],
                         "overrides": {
                             "mainSeriesProperties.showCountdown": true,
