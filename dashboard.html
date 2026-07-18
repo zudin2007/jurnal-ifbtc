@@ -220,6 +220,51 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     } else {
       enableStockChartClicks();
     }
+
+    // Add Watchlist Tab
+    function addWatchlistTab() {
+      // Create watchlist tab button
+      const tabButton = document.createElement('button');
+      tabButton.textContent = '📋 Watchlist';
+      tabButton.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        transition: all 0.3s ease;
+      `;
+
+      tabButton.onmouseover = () => {
+        tabButton.style.transform = 'scale(1.05)';
+        tabButton.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.3)';
+      };
+
+      tabButton.onmouseout = () => {
+        tabButton.style.transform = 'scale(1)';
+        tabButton.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+      };
+
+      tabButton.onclick = () => {
+        window.location.href = 'watchlist.html';
+      };
+
+      document.body.appendChild(tabButton);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', addWatchlistTab);
+    } else {
+      addWatchlistTab();
+    }
   </script>
 
 </body>
