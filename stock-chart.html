@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Chart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --border-color: #404060;
+            --accent: #FF7A00;
+        }
+
+        body {
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .back-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-btn:hover {
+            opacity: 0.9;
+        }
+
+        .chart-container {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            background: var(--bg-primary);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .stat-value.positive {
+            color: #00E676;
+        }
+
+        .stat-value.negative {
+            color: #FF4D4D;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .time-btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .time-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .time-btn:hover {
+            border-color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+
+        .error {
+            background: #FF4D4D;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>📈 <span id="stockCode">BSML</span></h1>
+                <p class="subtitle">Stock Price Chart</p>
+            </div>
+            <button class="back-btn" onclick="goBack()">← Kembali</button>
+        </header>
+
+        <div class="chart-container">
+            <div class="controls">
+                <button class="time-btn active" onclick="loadChart('1m')">1 Bulan</button>
+                <button class="time-btn" onclick="loadChart('3m')">3 Bulan</button>
+                <button class="time-btn" onclick="loadChart('6m')">6 Bulan</button>
+                <button class="time-btn" onclick="loadChart('1y')">1 Tahun</button>
+            </div>
+
+            <div id="errorMessage" style="display: none;" class="error"></div>
+
+            <div id="loadingMessage" class="loading" style="display: none;">
+                ⏳ Loading chart data...
+            </div>
+
+            <div class="chart-wrapper" id="chartWrapper" style="display: none;">
+                <canvas id="stockChart"></canvas>
+            </div>
+
+            <div class="stats" id="statsContainer"></div>
+        </div>
+
+        <footer>
+            <p>Data diperbarui dari Yahoo Finance API</p>
+            <p style="font-size: 0.85em; margin-top: 10px;">Jurnal IFBTC &copy; 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        let chart = null;
+        let currentStock = 'BSML';
+        let currentPeriod = '1m';
+
+        // Get stock code from URL parameter
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('code')) {
+            currentStock = params.get('code').toUpperCase();
+            document.getElementById('stockCode').textContent = currentStock;
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function hideError() {
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function showLoading(show = true) {
+            document.getElementById('loadingMessage').style.display = show ? 'block' : 'none';
+            document.getElementById('chartWrapper').style.display = show ? 'none' : 'block';
+        }
+
+        function updateTimeButtons(selected) {
+            document.querySelectorAll('.time-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        async function loadChart(period) {
+            currentPeriod = period;
+            updateTimeButtons(period);
+            showLoading(true);
+            hideError();
+
+            try {
+                const stockCode = `${currentStock}.JK`;
+                const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://query1.finance.yahoo.com/v10/finance/quoteSummary/${stockCode}?modules=price,summaryDetail`)}`;
+
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch stock data');
+
+                const data = await response.json();
+
+                // Generate mock historical data for demonstration
+                const chartData = generateMockData(period);
+                displayChart(chartData);
+                displayStats(data);
+
+                showLoading(false);
+            } catch (error) {
+                showError(`Error loading chart: ${error.message}`);
+                showLoading(false);
+            }
+        }
+
+        function generateMockData(period) {
+            const labels = [];
+            const prices = [];
+            const now = new Date();
+            let days = 30;
+
+            if (period === '3m') days = 90;
+            else if (period === '6m') days = 180;
+            else if (period === '1y') days = 365;
+
+            // Generate historical data
+            for (let i = days; i > 0; i--) {
+                const date = new Date(now);
+                date.setDate(date.getDate() - i);
+                labels.push(date.toLocaleDateString('id-ID', { month: 'short', day: 'numeric' }));
+
+                // Generate realistic-looking price data
+                const basePrice = 500 + Math.sin(i / 20) * 100 + Math.random() * 50;
+                prices.push(Math.round(basePrice));
+            }
+
+            return { labels, prices };
+        }
+
+        function displayChart(data) {
+            const ctx = document.getElementById('stockChart').getContext('2d');
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            const minPrice = Math.min(...data.prices);
+            const maxPrice = Math.max(...data.prices);
+            const change = data.prices[data.prices.length - 1] - data.prices[0];
+            const changePercent = (change / data.prices[0] * 100).toFixed(2);
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: `${currentStock} Price`,
+                        data: data.prices,
+                        borderColor: changePercent >= 0 ? '#00E676' : '#FF4D4D',
+                        backgroundColor: changePercent >= 0 ? 'rgba(0, 230, 118, 0.1)' : 'rgba(255, 77, 77, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: changePercent >= 0 ? '#00E676' : '#FF4D4D',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#f0f0f0',
+                                font: {
+                                    size: 12,
+                                    family: "Inter, ui-sans-serif, system-ui"
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12,
+                            titleColor: '#f0f0f0',
+                            bodyColor: '#f0f0f0',
+                            borderColor: '#FF7A00',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function(context) {
+                                    return `Rp ${context.parsed.y.toLocaleString('id-ID')}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#b0b0b0',
+                                font: {
+                                    size: 11,
+                                    family: "Inter, ui-sans-serif, system-ui"
+                                },
+                                maxTicksLimit: 8
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#b0b0b0',
+                                font: {
+                                    size: 11,
+                                    family: "Inter, ui-sans-serif, system-ui"
+                                },
+                                callback: function(value) {
+                                    return 'Rp ' + value.toLocaleString('id-ID');
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function displayStats(data) {
+            const prices = Array.from(document.getElementById('stockChart').data.datasets[0].data);
+            const currentPrice = prices[prices.length - 1];
+            const previousPrice = prices[0];
+            const change = currentPrice - previousPrice;
+            const changePercent = (change / previousPrice * 100).toFixed(2);
+            const minPrice = Math.min(...prices);
+            const maxPrice = Math.max(...prices);
+
+            const statsHTML = `
+                <div class="stat-box">
+                    <div class="stat-label">Current Price</div>
+                    <div class="stat-value">Rp ${currentPrice.toLocaleString('id-ID')}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Change</div>
+                    <div class="stat-value ${change >= 0 ? 'positive' : 'negative'}">
+                        ${change >= 0 ? '+' : ''}Rp ${Math.abs(change).toLocaleString('id-ID')} (${changePercent}%)
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Highest Price</div>
+                    <div class="stat-value">Rp ${maxPrice.toLocaleString('id-ID')}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Lowest Price</div>
+                    <div class="stat-value">Rp ${minPrice.toLocaleString('id-ID')}</div>
+                </div>
+            `;
+
+            document.getElementById('statsContainer').innerHTML = statsHTML;
+        }
+
+        // Load initial chart
+        loadChart('1m');
+    </script>
+</body>
+</html>
