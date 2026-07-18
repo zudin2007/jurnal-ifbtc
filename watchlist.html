@@ -144,6 +144,49 @@
             font-size: 1.2em;
         }
 
+        .controls-section {
+            margin-bottom: 25px;
+        }
+
+        .controls-label {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .category-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .category-btn:hover {
+            background: var(--bg-primary);
+            border-color: var(--accent);
+        }
+
+        .category-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
         .sort-controls {
             display: flex;
             gap: 10px;
@@ -193,13 +236,26 @@
             <button class="back-btn" onclick="goBack()">← Kembali</button>
         </header>
 
-        <div class="sort-controls">
-            <button class="sort-btn active" onclick="sortWatchlist('change', 'desc')">📊 Perubahan (Terbesar ▼)</button>
-            <button class="sort-btn" onclick="sortWatchlist('change', 'asc')">📊 Perubahan (Terkecil ▲)</button>
-            <button class="sort-btn" onclick="sortWatchlist('price', 'desc')">💰 Harga (Tertinggi)</button>
-            <button class="sort-btn" onclick="sortWatchlist('price', 'asc')">💰 Harga (Terendah)</button>
-            <button class="sort-btn" onclick="sortWatchlist('code', 'asc')">🔤 Kode Saham (A-Z)</button>
-            <button class="sort-btn" onclick="sortWatchlist('name', 'asc')">🔤 Nama (A-Z)</button>
+        <div class="controls-section">
+            <div class="controls-label">📁 Filter Kategori</div>
+            <div class="category-controls">
+                <button class="category-btn active" onclick="filterCategory('all')">📊 Semua Saham</button>
+                <button class="category-btn" onclick="filterCategory('th-value')">🏦 TH Value In...</button>
+                <button class="category-btn" onclick="filterCategory('lkh')">💼 LKH</button>
+                <button class="category-btn" onclick="filterCategory('issi-midcap')">📈 ISSI Midcap</button>
+            </div>
+        </div>
+
+        <div class="controls-section">
+            <div class="controls-label">🔄 Urutkan</div>
+            <div class="sort-controls">
+                <button class="sort-btn active" onclick="sortWatchlist('change', 'desc')">📊 Perubahan (Terbesar ▼)</button>
+                <button class="sort-btn" onclick="sortWatchlist('change', 'asc')">📊 Perubahan (Terkecil ▲)</button>
+                <button class="sort-btn" onclick="sortWatchlist('price', 'desc')">💰 Harga (Tertinggi)</button>
+                <button class="sort-btn" onclick="sortWatchlist('price', 'asc')">💰 Harga (Terendah)</button>
+                <button class="sort-btn" onclick="sortWatchlist('code', 'asc')">🔤 Kode Saham (A-Z)</button>
+                <button class="sort-btn" onclick="sortWatchlist('name', 'asc')">🔤 Nama (A-Z)</button>
+            </div>
         </div>
 
         <div class="watchlist-container">
@@ -226,31 +282,43 @@
     <script>
         const stockData = [
             // TH Value In... Portfolio
-            { code: 'TLKM', name: 'Telekomunikasi Indonesia', price: 2660, change: 4.89 },
-            { code: 'BBCA', name: 'Bank Central Asia', price: 6475, change: 3.86 },
-            { code: 'BMRI', name: 'Bank Mandiri', price: 4480, change: 3.79 },
-            { code: 'BBRI', name: 'Bank Rakyat Indonesia', price: 2970, change: 3.70 },
-            { code: 'AADI', name: 'Astra Oto Parts', price: 8750, change: 2.86 },
-            { code: 'BBNI', name: 'Bank Negara Indonesia', price: 3580, change: 2.24 },
-            { code: 'APLN', name: 'Airlangga Pribumi', price: 136, change: 0.00 },
-            { code: 'INDF', name: 'Indofood Sukses Makmur', price: 6700, change: -0.75 },
-            { code: 'ADRO', name: 'Adaro Energy', price: 2490, change: -0.80 },
-            { code: 'HRTA', name: 'Hartono Isteel', price: 1910, change: -2.62 },
+            { code: 'TLKM', name: 'Telekomunikasi Indonesia', price: 2660, change: 4.89, category: 'th-value' },
+            { code: 'BBCA', name: 'Bank Central Asia', price: 6475, change: 3.86, category: 'th-value' },
+            { code: 'BMRI', name: 'Bank Mandiri', price: 4480, change: 3.79, category: 'th-value' },
+            { code: 'BBRI', name: 'Bank Rakyat Indonesia', price: 2970, change: 3.70, category: 'th-value' },
+            { code: 'AADI', name: 'Astra Oto Parts', price: 8750, change: 2.86, category: 'th-value' },
+            { code: 'BBNI', name: 'Bank Negara Indonesia', price: 3580, change: 2.24, category: 'th-value' },
+            { code: 'APLN', name: 'Airlangga Pribumi', price: 136, change: 0.00, category: 'th-value' },
+            { code: 'INDF', name: 'Indofood Sukses Makmur', price: 6700, change: -0.75, category: 'th-value' },
+            { code: 'ADRO', name: 'Adaro Energy', price: 2490, change: -0.80, category: 'th-value' },
+            { code: 'HRTA', name: 'Hartono Isteel', price: 1910, change: -2.62, category: 'th-value' },
 
             // LKH Portfolio
-            { code: 'BEST', name: 'Bekasi Fajar Industrial Estate', price: 102, change: -0.98 },
-            { code: 'DILD', name: 'Intiland Development', price: 115, change: -1.74 },
-            { code: 'BMTR', name: 'Consolidated Plantations', price: 120, change: -1.67 },
-            { code: 'SRIL', name: 'Sri Rejeki Isman', price: 146, change: 0.00 },
-            { code: 'ADMG', name: 'Adimulya', price: 216, change: 0.00 },
-            { code: 'CFIN', name: 'China Finance', price: 334, change: 0.00 },
-            { code: 'RALS', name: 'Ratu Prabu', price: 384, change: 1.04 },
-            { code: 'SIMP', name: 'Simp Multi Media', price: 550, change: -0.91 },
-            { code: 'MAIN', name: 'Mainroad', price: 720, change: 5.56 },
-            { code: 'PNIN', name: 'Panin Financial', price: 750, change: 2.00 },
-            { code: 'GJTL', name: 'Gajah Tunggal', price: 1145, change: 1.31 },
-            { code: 'LSIP', name: 'Lisapro Sejahtera', price: 1320, change: -1.14 },
-            { code: 'ABMM', name: 'Asuransi Bina Media', price: 2500, change: 2.00 }
+            { code: 'BEST', name: 'Bekasi Fajar Industrial Estate', price: 102, change: -0.98, category: 'lkh' },
+            { code: 'DILD', name: 'Intiland Development', price: 115, change: -1.74, category: 'lkh' },
+            { code: 'BMTR', name: 'Consolidated Plantations', price: 120, change: -1.67, category: 'lkh' },
+            { code: 'SRIL', name: 'Sri Rejeki Isman', price: 146, change: 0.00, category: 'lkh' },
+            { code: 'ADMG', name: 'Adimulya', price: 216, change: 0.00, category: 'lkh' },
+            { code: 'CFIN', name: 'China Finance', price: 334, change: 0.00, category: 'lkh' },
+            { code: 'RALS', name: 'Ratu Prabu', price: 384, change: 1.04, category: 'lkh' },
+            { code: 'SIMP', name: 'Simp Multi Media', price: 550, change: -0.91, category: 'lkh' },
+            { code: 'MAIN', name: 'Mainroad', price: 720, change: 5.56, category: 'lkh' },
+            { code: 'PNIN', name: 'Panin Financial', price: 750, change: 2.00, category: 'lkh' },
+            { code: 'GJTL', name: 'Gajah Tunggal', price: 1145, change: 1.31, category: 'lkh' },
+            { code: 'LSIP', name: 'Lisapro Sejahtera', price: 1320, change: -1.14, category: 'lkh' },
+            { code: 'ABMM', name: 'Asuransi Bina Media', price: 2500, change: 2.00, category: 'lkh' },
+
+            // ISSI Midcap Portfolio
+            { code: 'SIDO', name: 'Industri Jamu & Farmasi Sido Muncul', price: 380, change: -1.05, category: 'issi-midcap' },
+            { code: 'KLBF', name: 'Kalbe Farma', price: 760, change: 5.26, category: 'issi-midcap' },
+            { code: 'BRIS', name: 'Bank Rakyat Indonesia Syariah', price: 1910, change: 8.90, category: 'issi-midcap' },
+            { code: 'MYOR', name: 'Mayora Indah', price: 1750, change: 0.57, category: 'issi-midcap' },
+            { code: 'PTBA', name: 'Pertambangan Bukit Asam', price: 2410, change: -0.41, category: 'issi-midcap' },
+            { code: 'JPFA', name: 'Japfa Comfeed Indonesia', price: 2070, change: 1.93, category: 'issi-midcap' },
+            { code: 'ISAT', name: 'Inovisi Infra', price: 1900, change: 0.79, category: 'issi-midcap' },
+            { code: 'MIKA', name: 'Mitra Keluarga Karyasehat', price: 1755, change: -0.28, category: 'issi-midcap' },
+            { code: 'AKRA', name: 'Akra Perindustrian', price: 1355, change: -1.11, category: 'issi-midcap' },
+            { code: 'AMRT', name: 'Sumber Alfaria Trijaya', price: 1335, change: 0.37, category: 'issi-midcap' }
         ];
 
         function goBack() {
@@ -258,10 +326,21 @@
         }
 
         let currentSort = { by: 'change', order: 'desc' };
+        let currentCategory = 'all';
         let sortedData = [...stockData];
 
         function openChart(code) {
             window.open(`stock-chart.html?code=${code}`, '_blank');
+        }
+
+        function filterCategory(category) {
+            currentCategory = category;
+
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            renderWatchlist();
         }
 
         function sortWatchlist(sortBy, order) {
@@ -311,7 +390,46 @@
             const tbody = document.getElementById('watchlistBody');
             tbody.innerHTML = '';
 
-            sortedData.forEach(stock => {
+            // Filter by category
+            let filteredData = sortedData.filter(stock => {
+                if (currentCategory === 'all') return true;
+                return stock.category === currentCategory;
+            });
+
+            // Apply sorting
+            filteredData.sort((a, b) => {
+                let aVal, bVal;
+
+                switch(currentSort.by) {
+                    case 'change':
+                        aVal = a.change;
+                        bVal = b.change;
+                        break;
+                    case 'price':
+                        aVal = a.price;
+                        bVal = b.price;
+                        break;
+                    case 'code':
+                        aVal = a.code.toLowerCase();
+                        bVal = b.code.toLowerCase();
+                        break;
+                    case 'name':
+                        aVal = a.name.toLowerCase();
+                        bVal = b.name.toLowerCase();
+                        break;
+                    default:
+                        aVal = a.change;
+                        bVal = b.change;
+                }
+
+                if (typeof aVal === 'string') {
+                    return currentSort.order === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+                } else {
+                    return currentSort.order === 'asc' ? aVal - bVal : bVal - aVal;
+                }
+            });
+
+            filteredData.forEach(stock => {
                 const row = document.createElement('tr');
                 const changeClass = stock.change >= 0 ? 'positive' : 'negative';
                 const changeIcon = stock.change >= 0 ? '▲' : '▼';
