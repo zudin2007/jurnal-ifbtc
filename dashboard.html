@@ -145,23 +145,47 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
 </script>
   <script>(function(){function m(a){var h=a.getAttribute("href");if(!h)return;try{var u=new URL(h,document.baseURI);if((u.protocol==="http:"||u.protocol==="https:")&&u.host!==location.host){a.target="_blank";a.rel="noopener noreferrer";}}catch(e){}}function s(){document.querySelectorAll("a[href]").forEach(m);}if(document.readyState!=="loading"){s();}else{document.addEventListener("DOMContentLoaded",s);}document.addEventListener("click",function(e){var a=e.target&&e.target.closest&&e.target.closest("a[href]");if(a){m(a);}},true);})();</script>
   <script>
-    setTimeout(() => {
-      document.querySelectorAll('span[class*="bg-white"]').forEach(el => {
-        const code = el.textContent?.trim();
-        if (code && /^[A-Z]{4,5}$/.test(code) && code !== 'LIVE') {
-          el.style.cursor = 'pointer';
-          el.addEventListener('click', () => {
-            window.open(`stock-chart.html?code=${code}`, '_blank');
-          });
-          el.addEventListener('mouseenter', () => {
-            el.style.opacity = '0.8';
-          });
-          el.addEventListener('mouseleave', () => {
-            el.style.opacity = '1';
-          });
+    function enableStockChartClicks() {
+      const stockCodePattern = /^[A-Z]{4,5}$/;
+
+      document.addEventListener('click', (e) => {
+        let target = e.target;
+        while (target && target !== document) {
+          const text = target.textContent?.trim();
+          if (text && stockCodePattern.test(text) && text !== 'LIVE' && target.children.length === 0) {
+            e.preventDefault();
+            window.open(`stock-chart.html?code=${text}`, '_blank');
+            break;
+          }
+          target = target.parentElement;
         }
       });
-    }, 1000);
+
+      setTimeout(() => {
+        document.querySelectorAll('*').forEach(el => {
+          const text = el.textContent?.trim();
+          if (text && el.children.length === 0 && stockCodePattern.test(text) && text !== 'LIVE' &&
+              el.offsetHeight < 50 && el.offsetWidth < 100) {
+            el.style.cursor = 'pointer';
+            el.style.userSelect = 'none';
+            el.addEventListener('mouseenter', () => {
+              el.style.opacity = '0.7';
+              el.style.textDecoration = 'underline';
+            });
+            el.addEventListener('mouseleave', () => {
+              el.style.opacity = '1';
+              el.style.textDecoration = 'none';
+            });
+          }
+        });
+      }, 500);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', enableStockChartClicks);
+    } else {
+      enableStockChartClicks();
+    }
   </script>
 </body>
 </html>
