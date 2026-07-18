@@ -249,19 +249,10 @@
             hideError();
 
             try {
-                const stockCode = `${currentStock}.JK`;
-                const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://query1.finance.yahoo.com/v10/finance/quoteSummary/${stockCode}?modules=price,summaryDetail`)}`;
-
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('Failed to fetch stock data');
-
-                const data = await response.json();
-
                 // Generate mock historical data for demonstration
                 const chartData = generateMockData(period);
                 displayChart(chartData);
-                displayStats(data);
-
+                displayStats();
                 showLoading(false);
             } catch (error) {
                 showError(`Error loading chart: ${error.message}`);
@@ -388,8 +379,10 @@
             });
         }
 
-        function displayStats(data) {
-            const prices = Array.from(document.getElementById('stockChart').data.datasets[0].data);
+        function displayStats() {
+            if (!chart || !chart.data.datasets[0].data) return;
+
+            const prices = Array.from(chart.data.datasets[0].data);
             const currentPrice = prices[prices.length - 1];
             const previousPrice = prices[0];
             const change = currentPrice - previousPrice;
