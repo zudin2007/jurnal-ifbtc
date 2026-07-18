@@ -144,6 +144,36 @@
             font-size: 1.2em;
         }
 
+        .sort-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .sort-btn {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .sort-btn:hover {
+            background: var(--bg-primary);
+            border-color: var(--accent);
+        }
+
+        .sort-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
         footer {
             text-align: center;
             color: var(--text-secondary);
@@ -162,6 +192,15 @@
             </div>
             <button class="back-btn" onclick="goBack()">← Kembali</button>
         </header>
+
+        <div class="sort-controls">
+            <button class="sort-btn active" onclick="sortWatchlist('change', 'desc')">📊 Perubahan (Terbesar ▼)</button>
+            <button class="sort-btn" onclick="sortWatchlist('change', 'asc')">📊 Perubahan (Terkecil ▲)</button>
+            <button class="sort-btn" onclick="sortWatchlist('price', 'desc')">💰 Harga (Tertinggi)</button>
+            <button class="sort-btn" onclick="sortWatchlist('price', 'asc')">💰 Harga (Terendah)</button>
+            <button class="sort-btn" onclick="sortWatchlist('code', 'asc')">🔤 Kode Saham (A-Z)</button>
+            <button class="sort-btn" onclick="sortWatchlist('name', 'asc')">🔤 Nama (A-Z)</button>
+        </div>
 
         <div class="watchlist-container">
             <table>
@@ -218,14 +257,61 @@
             window.location.href = 'dashboard.html';
         }
 
+        let currentSort = { by: 'change', order: 'desc' };
+        let sortedData = [...stockData];
+
         function openChart(code) {
             window.open(`stock-chart.html?code=${code}`, '_blank');
         }
 
-        function initializeWatchlist() {
-            const tbody = document.getElementById('watchlistBody');
+        function sortWatchlist(sortBy, order) {
+            currentSort = { by: sortBy, order: order };
+            sortedData = [...stockData];
 
-            stockData.forEach(stock => {
+            sortedData.sort((a, b) => {
+                let aVal, bVal;
+
+                switch(sortBy) {
+                    case 'change':
+                        aVal = a.change;
+                        bVal = b.change;
+                        break;
+                    case 'price':
+                        aVal = a.price;
+                        bVal = b.price;
+                        break;
+                    case 'code':
+                        aVal = a.code.toLowerCase();
+                        bVal = b.code.toLowerCase();
+                        break;
+                    case 'name':
+                        aVal = a.name.toLowerCase();
+                        bVal = b.name.toLowerCase();
+                        break;
+                    default:
+                        aVal = a.change;
+                        bVal = b.change;
+                }
+
+                if (typeof aVal === 'string') {
+                    return order === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+                } else {
+                    return order === 'asc' ? aVal - bVal : bVal - aVal;
+                }
+            });
+
+            // Update active button
+            document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            renderWatchlist();
+        }
+
+        function renderWatchlist() {
+            const tbody = document.getElementById('watchlistBody');
+            tbody.innerHTML = '';
+
+            sortedData.forEach(stock => {
                 const row = document.createElement('tr');
                 const changeClass = stock.change >= 0 ? 'positive' : 'negative';
                 const changeIcon = stock.change >= 0 ? '▲' : '▼';
@@ -245,6 +331,11 @@
                 row.onclick = () => openChart(stock.code);
                 tbody.appendChild(row);
             });
+        }
+
+        function initializeWatchlist() {
+            sortedData = [...stockData];
+            renderWatchlist();
         }
 
         document.addEventListener('DOMContentLoaded', initializeWatchlist);
