@@ -285,7 +285,8 @@
         }
 
         function displayChart(data) {
-            const ctx = document.getElementById('stockChart').getContext('2d');
+            const canvas = document.getElementById('stockChart');
+            const ctx = canvas.getContext('2d');
 
             if (chart) {
                 chart.destroy();
@@ -377,41 +378,51 @@
                     }
                 }
             });
+            canvas.chart = chart;
         }
 
         function displayStats() {
-            if (!chart || !chart.data.datasets[0].data) return;
+            try {
+                const canvas = document.getElementById('stockChart');
+                if (!canvas || !canvas.chart) return;
 
-            const prices = Array.from(chart.data.datasets[0].data);
-            const currentPrice = prices[prices.length - 1];
-            const previousPrice = prices[0];
-            const change = currentPrice - previousPrice;
-            const changePercent = (change / previousPrice * 100).toFixed(2);
-            const minPrice = Math.min(...prices);
-            const maxPrice = Math.max(...prices);
+                const chartInstance = canvas.chart;
+                const prices = chartInstance.data.datasets[0].data;
 
-            const statsHTML = `
-                <div class="stat-box">
-                    <div class="stat-label">Current Price</div>
-                    <div class="stat-value">Rp ${currentPrice.toLocaleString('id-ID')}</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">Change</div>
-                    <div class="stat-value ${change >= 0 ? 'positive' : 'negative'}">
-                        ${change >= 0 ? '+' : ''}Rp ${Math.abs(change).toLocaleString('id-ID')} (${changePercent}%)
+                if (!prices || prices.length === 0) return;
+
+                const currentPrice = prices[prices.length - 1];
+                const previousPrice = prices[0];
+                const change = currentPrice - previousPrice;
+                const changePercent = (change / previousPrice * 100).toFixed(2);
+                const minPrice = Math.min(...prices);
+                const maxPrice = Math.max(...prices);
+
+                const statsHTML = `
+                    <div class="stat-box">
+                        <div class="stat-label">Current Price</div>
+                        <div class="stat-value">Rp ${currentPrice.toLocaleString('id-ID')}</div>
                     </div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">Highest Price</div>
-                    <div class="stat-value">Rp ${maxPrice.toLocaleString('id-ID')}</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">Lowest Price</div>
-                    <div class="stat-value">Rp ${minPrice.toLocaleString('id-ID')}</div>
-                </div>
-            `;
+                    <div class="stat-box">
+                        <div class="stat-label">Change</div>
+                        <div class="stat-value ${change >= 0 ? 'positive' : 'negative'}">
+                            ${change >= 0 ? '+' : ''}Rp ${Math.abs(change).toLocaleString('id-ID')} (${changePercent}%)
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Highest Price</div>
+                        <div class="stat-value">Rp ${maxPrice.toLocaleString('id-ID')}</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Lowest Price</div>
+                        <div class="stat-value">Rp ${minPrice.toLocaleString('id-ID')}</div>
+                    </div>
+                `;
 
-            document.getElementById('statsContainer').innerHTML = statsHTML;
+                document.getElementById('statsContainer').innerHTML = statsHTML;
+            } catch (error) {
+                console.error('Stats error:', error);
+            }
         }
 
         // Load initial chart
