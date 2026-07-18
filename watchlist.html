@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch List - Jurnal IFBTC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --border-color: #404060;
+            --accent: #FF7A00;
+            --orange: #FF9500;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--orange) 0%, var(--accent) 100%);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .header-subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-btn, .refresh-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .menu-btn:hover, .refresh-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .container {
+            max-width: 100%;
+            margin-top: 80px;
+            margin-bottom: 80px;
+            padding: 20px;
+        }
+
+        .content-card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .eye-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .content-card h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .content-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .watchlist-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .watchlist-table thead {
+            background: var(--bg-primary);
+        }
+
+        .watchlist-table th {
+            padding: 16px 12px;
+            text-align: left;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .watchlist-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+        }
+
+        .watchlist-table tbody tr:hover {
+            background: rgba(255, 122, 0, 0.05);
+        }
+
+        .watchlist-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ticker {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .price {
+            text-align: right;
+            color: var(--text-primary);
+        }
+
+        .change {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .change.positive {
+            color: #00E676;
+        }
+
+        .change.negative {
+            color: #FF4D4D;
+        }
+
+        .change.neutral {
+            color: var(--text-secondary);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            padding: 12px;
+            text-align: center;
+            border: none;
+            background: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--orange);
+            border-bottom: 3px solid var(--orange);
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 122, 0, 0.1);
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding: 0 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 18px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .watchlist-table {
+                font-size: 13px;
+            }
+
+            .watchlist-table th, .watchlist-table td {
+                padding: 10px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <h1>👁️ My Portfolio</h1>
+            <span class="header-subtitle">Watch List</span>
+        </div>
+        <button class="refresh-btn">🔄</button>
+    </div>
+
+    <div class="container">
+        <div class="section-title">📊 Watchlist Stocks</div>
+
+        <div class="section-title" style="margin-top: 20px; margin-bottom: 10px;">TH Value In... Portfolio</div>
+        <table class="watchlist-table">
+            <thead>
+                <tr>
+                    <th>Ticker</th>
+                    <th style="text-align: right;">Last Price</th>
+                    <th style="text-align: right;">Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="ticker">TLKM.JK</td>
+                    <td class="price">Rp2,660.00</td>
+                    <td class="change positive">+130.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">BBCA.JK</td>
+                    <td class="price">Rp6,475.00</td>
+                    <td class="change positive">+250.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">BMRI.JK</td>
+                    <td class="price">Rp4,480.00</td>
+                    <td class="change positive">+170.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">BBRI.JK</td>
+                    <td class="price">Rp2,970.00</td>
+                    <td class="change positive">+110.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">AADI.JK</td>
+                    <td class="price">Rp8,750.00</td>
+                    <td class="change positive">+250.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">BBNI.JK</td>
+                    <td class="price">Rp3,580.00</td>
+                    <td class="change positive">+80.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">APLN.JK</td>
+                    <td class="price">Rp136.00</td>
+                    <td class="change neutral">0.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">INDF.JK</td>
+                    <td class="price">Rp6,700.00</td>
+                    <td class="change negative">-50.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">ADRO.JK</td>
+                    <td class="price">Rp2,490.00</td>
+                    <td class="change negative">-20.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">HRTA.JK</td>
+                    <td class="price">Rp1,910.00</td>
+                    <td class="change negative">-50.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="section-title" style="margin-top: 30px; margin-bottom: 10px;">LKH Portfolio</div>
+        <table class="watchlist-table">
+            <thead>
+                <tr>
+                    <th>Ticker</th>
+                    <th style="text-align: right;">Last Price</th>
+                    <th style="text-align: right;">Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="ticker">BEST.JK</td>
+                    <td class="price">Rp102.00</td>
+                    <td class="change negative">-1.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">DILD.JK</td>
+                    <td class="price">Rp115.00</td>
+                    <td class="change negative">-2.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">BMTR.JK</td>
+                    <td class="price">Rp120.00</td>
+                    <td class="change negative">-2.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">SRIL.JK</td>
+                    <td class="price">Rp146.00</td>
+                    <td class="change neutral">0.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">ADMG.JK</td>
+                    <td class="price">Rp216.00</td>
+                    <td class="change neutral">0.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">CFIN.JK</td>
+                    <td class="price">Rp334.00</td>
+                    <td class="change neutral">0.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">RALS.JK</td>
+                    <td class="price">Rp384.00</td>
+                    <td class="change positive">+4.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">SIMP.JK</td>
+                    <td class="price">Rp550.00</td>
+                    <td class="change negative">-5.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">MAIN.JK</td>
+                    <td class="price">Rp720.00</td>
+                    <td class="change positive">+40.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">PNIN.JK</td>
+                    <td class="price">Rp750.00</td>
+                    <td class="change positive">+15.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">GJTL.JK</td>
+                    <td class="price">Rp1,145.00</td>
+                    <td class="change positive">+15.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">LSIP.JK</td>
+                    <td class="price">Rp1,320.00</td>
+                    <td class="change negative">-15.00</td>
+                </tr>
+                <tr>
+                    <td class="ticker">ABMM.JK</td>
+                    <td class="price">Rp2,500.00</td>
+                    <td class="change positive">+50.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="watchlist.html" class="nav-item active">
+            <span class="nav-icon">👁️</span>
+            <span>Watch List</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">📰</span>
+            <span>News</span>
+        </a>
+        <a href="dashboard.html" class="nav-item">
+            <span class="nav-icon">📊</span>
+            <span>Portfolio</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">⭐</span>
+            <span>Stock Recommend</span>
+        </a>
+    </div>
+
+    <script>
+        // Refresh button functionality
+        document.querySelector('.refresh-btn').addEventListener('click', function() {
+            location.reload();
+        });
+
+        // Click on tickers to view charts
+        document.querySelectorAll('.ticker').forEach(ticker => {
+            ticker.style.cursor = 'pointer';
+            ticker.addEventListener('click', function(e) {
+                const code = this.textContent.replace('.JK', '');
+                window.open(`stock-chart.html?code=${code}`, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
