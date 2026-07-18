@@ -243,5 +243,1508 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       }
     });
   </script>
+  <div id="portfolioModal" class="portfolio-modal">
+    <div class="portfolio-modal-content">
+      <button class="portfolio-modal-close">&times;</button>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div>
+      <div class="header-title">Super Investor Dashboard</div>
+      <div class="header-sub">LKH · Sandiaga Uno · Teguh Hidayat &nbsp;|&nbsp; Harga update 12 Juli 2026</div>
+    </div>
+    <div class="header-badges">
+      <span class="badge badge-lkh">LKH · Rp1,83T</span>
+      <span class="badge badge-sandi">SANDI · NAV Rp53,99T</span>
+      <span class="badge badge-teguh">TEGUH · +29% vs IHSG</span>
+    </div>
+  </div>
+</header>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" data-target="overview">Overview</button>
+    <button class="tab-btn" data-target="perbandingan">Perbandingan Gaya</button>
+    <button class="tab-btn" data-target="simulasi">Simulasi Lot</button>
+    <button class="tab-btn" data-target="live">Harga Live</button>
+    <button class="tab-btn" data-target="feed">Feed KSEI</button>
+  </div>
+</nav>
+
+<div class="main-wrap">
+
+<!-- ══ PANEL: OVERVIEW ════════════════════════════════════════════ -->
+<section class="tab-panel active" id="panel-overview">
+
+  <!-- Investor summary cards -->
+  <div class="inv-grid">
+    <!-- LKH -->
+    <div class="inv-card inv-lkh">
+      <div class="inv-card-top">
+        <div class="inv-card-label">Lo Kheng Hong</div>
+        <div class="inv-card-name">Deep Value<br>Second Liner</div>
+        <div class="inv-card-stats">13 emiten · Rp1,83T (Maret 2026)</div>
+      </div>
+      <div class="inv-card-body">
+        <span class="inv-card-tag">Diskon Ekstrem</span>
+        <div class="inv-card-desc">Cari diskon ekstrem, tidak takut suspensi (SRIL 1,02%), hidden ownership PGAS/BDMN. Top akumulasi DILD 6,92% &amp; SIMP &gt;5%.</div>
+        <div class="holdings-list" id="lkh-bars"><div class="holding-row">
+      <span class="holding-code">DILD</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:69.19999999999999%;background:#4F46E5;"></div></div>
+      <span class="holding-pct">6.92%</span>
+    </div><div class="holding-row">
+      <span class="holding-code">GJTL</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:66.8%;background:#4F46E5;"></div></div>
+      <span class="holding-pct">6.68%</span>
+    </div><div class="holding-row">
+      <span class="holding-code">BMTR</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:64.3%;background:#4F46E5;"></div></div>
+      <span class="holding-pct">6.43%</span>
+    </div><div class="holding-row">
+      <span class="holding-code">ABMM</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:56.39999999999999%;background:#4F46E5;"></div></div>
+      <span class="holding-pct">5.64%</span>
+    </div><div class="holding-row">
+      <span class="holding-code">SIMP</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:49.7%;background:#4F46E5;"></div></div>
+      <span class="holding-pct">4.97%</span>
+    </div></div>
+      </div>
+    </div>
+    <!-- SANDIAGA -->
+    <div class="inv-card inv-sandi">
+      <div class="inv-card-top">
+        <div class="inv-card-label">Sandiaga Uno</div>
+        <div class="inv-card-name">Private Equity<br>Via Holding</div>
+        <div class="inv-card-stats">NAV Rp53,99T · Div Rp1,26T</div>
+      </div>
+      <div class="inv-card-body">
+        <span class="inv-card-tag">Buy–Build–Sell</span>
+        <div class="inv-card-desc">SRTG 21,51% direct. Strategi private equity buy-build-sell. Exit NRCA &amp; PRAY tepat waktu. MDKA 19,47%, TBIG 9,13%.</div>
+        <div class="holdings-list" id="sandi-bars"><div class="holding-row">
+      <span class="holding-code">SRTG</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:86.04%;background:#059669;"></div></div>
+      <span class="holding-pct">21.51%</span>
+    </div><div class="holding-row">
+      <span class="holding-code">MDKA</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:77.88%;background:#059669;"></div></div>
+      <span class="holding-pct">19.47%</span>
+    </div><div class="holding-row">
+      <span class="holding-code">TBIG</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:36.52%;background:#059669;"></div></div>
+      <span class="holding-pct">9.13%</span>
+    </div><div class="holding-row">
+      <span class="holding-code">MPMX</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:24%;background:#059669;"></div></div>
+      <span class="holding-pct">6%</span>
+    </div><div class="holding-row">
+      <span class="holding-code">ADRO</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:16%;background:#059669;"></div></div>
+      <span class="holding-pct">4%</span>
+    </div></div>
+      </div>
+    </div>
+    <!-- TEGUH -->
+    <div class="inv-card inv-teguh">
+      <div class="inv-card-top">
+        <div class="inv-card-label">Teguh Hidayat</div>
+        <div class="inv-card-name">Bank Bluechip<br>Hold Compounding</div>
+        <div class="inv-card-stats">10 saham · Profit +29% kalahkan IHSG</div>
+      </div>
+      <div class="inv-card-body">
+        <span class="inv-card-tag">Value Fokus</span>
+        <div class="inv-card-desc">Disiplin max 12 saham. BBCA/BBRI/BMRI/BBNI inti (54% bank). ADRO modal 2.800, dividen yield 48%.</div>
+        <div class="holdings-list" id="teguh-bars"><div class="holding-row">
+      <span class="holding-code">BBCA</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:75%;background:#D97706;"></div></div>
+      <span class="holding-pct">15%</span>
+    </div><div class="holding-row">
+      <span class="holding-code">BBRI</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:75%;background:#D97706;"></div></div>
+      <span class="holding-pct">15%</span>
+    </div><div class="holding-row">
+      <span class="holding-code">BMRI</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:60%;background:#D97706;"></div></div>
+      <span class="holding-pct">12%</span>
+    </div><div class="holding-row">
+      <span class="holding-code">BBNI</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:60%;background:#D97706;"></div></div>
+      <span class="holding-pct">12%</span>
+    </div><div class="holding-row">
+      <span class="holding-code">TLKM</span>
+      <div class="holding-bar-wrap"><div class="holding-bar" style="width:50%;background:#D97706;"></div></div>
+      <span class="holding-pct">10%</span>
+    </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insight row -->
+  <div class="two-col mt-4">
+    <div class="card">
+      <div class="card-head"><span class="card-title">Ringkasan Strategi</span></div>
+      <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
+        <div style="padding:10px 14px;background:var(--lkh-bg);border:1px solid var(--lkh-border);border-radius:10px;">
+          <b style="color:var(--lkh)">LKH:</b> <span class="text-muted">Cari diskon ekstrem, tidak takut suspensi (SRIL 1,02%), hidden ownership PGAS/BDMN, total Rp1,83T Maret.</span>
+        </div>
+        <div style="padding:10px 14px;background:var(--sandi-bg);border:1px solid var(--sandi-border);border-radius:10px;">
+          <b style="color:var(--sandi)">Sandiaga:</b> <span class="text-muted">NAV Rp53,99T, dividen Rp1,26T, strategi private equity buy-build-sell, exit NRCA &amp; PRAY tepat waktu.</span>
+        </div>
+        <div style="padding:10px 14px;background:var(--teguh-bg);border:1px solid var(--teguh-border);border-radius:10px;">
+          <b style="color:var(--teguh)">Teguh:</b> <span class="text-muted">Disiplin max 12 saham, profit 29% kalahkan IHSG, BBCA/BBRI/BMRI/BBNI inti, ADRO modal 2.800 yield 48%.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-title">Venn Diagram — Overlap Kepemilikan</span></div>
+      <div class="card-body">
+        <div class="venn-wrap">
+          <div class="venn-circle venn-lkh">LKH<span>Second liner<br>diskon</span></div>
+          <div class="venn-circle venn-sandi">Sandi<span>via Holding<br>SRTG</span></div>
+          <div class="venn-circle venn-teguh">Teguh<span>Bank<br>bluechip</span></div>
+          <span class="venn-tag venn-tag-1">ADRO = Sandi &amp; Teguh</span>
+          <span class="venn-tag venn-tag-2">Energi &amp; Infra = irisan</span>
+        </div>
+        <div class="venn-notes">
+          <b>LKH</b> suka second liner diskon, akumulasi pelan saat PBV rendah.<br>
+          <b>Sandiaga</b> via holding SRTG, fokus bluechip tambang &amp; infra menara.<br>
+          <b>Teguh</b> fokus bank bluechip 54% weight, hold compounding.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sektor allocations -->
+  <div class="section-label mt-4">Alokasi Sektor per Investor</div>
+  <div class="sector-grid">
+    <div class="sector-card">
+      <div class="sector-card-title" style="color:var(--lkh)">LKH — Sektor</div>
+      <div class="sector-list" id="lkh-sectors">
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#4F46E5"></span>
+      <span class="sector-name">Properti</span>
+      <span class="sector-val">6.9%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#6366F1"></span>
+      <span class="sector-name">Media</span>
+      <span class="sector-val">6.4%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#818CF8"></span>
+      <span class="sector-name">Ban</span>
+      <span class="sector-val">6.7%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#A5B4FC"></span>
+      <span class="sector-name">Energi</span>
+      <span class="sector-val">5.6%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#C7D2FE"></span>
+      <span class="sector-name">Sawit</span>
+      <span class="sector-val">6.3%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#E0E7FF"></span>
+      <span class="sector-name">Lainnya</span>
+      <span class="sector-val">5.7%</span>
+    </div>
+  </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-card-title" style="color:var(--sandi)">Sandiaga (via SRTG) — Sektor</div>
+      <div class="sector-list" id="sandi-sectors">
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#059669"></span>
+      <span class="sector-name">Tambang</span>
+      <span class="sector-val">21.5%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#10B981"></span>
+      <span class="sector-name">Infra Menara</span>
+      <span class="sector-val">9.1%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#34D399"></span>
+      <span class="sector-name">Energi</span>
+      <span class="sector-val">6.1%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#6EE7B7"></span>
+      <span class="sector-name">Otomotif</span>
+      <span class="sector-val">6.0%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#A7F3D0"></span>
+      <span class="sector-name">Sawit</span>
+      <span class="sector-val">3.2%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#D1FAE5"></span>
+      <span class="sector-name">Gas/Holding</span>
+      <span class="sector-val">3.1%</span>
+    </div>
+  </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-card-title" style="color:var(--teguh)">Teguh — Sektor</div>
+      <div class="sector-list" id="teguh-sectors">
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#D97706"></span>
+      <span class="sector-name">Bank</span>
+      <span class="sector-val">54.0%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#F59E0B"></span>
+      <span class="sector-name">Energi</span>
+      <span class="sector-val">15.0%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#FCD34D"></span>
+      <span class="sector-name">Telco</span>
+      <span class="sector-val">10.0%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#FDE68A"></span>
+      <span class="sector-name">Consumer</span>
+      <span class="sector-val">8.0%</span>
+    </div>
+  
+    <div class="sector-row">
+      <span class="sector-dot" style="background:#FEF3C7"></span>
+      <span class="sector-name">Emas/Properti</span>
+      <span class="sector-val">13.0%</span>
+    </div>
+  </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══ PANEL: PERBANDINGAN ════════════════════════════════════════ -->
+<section class="tab-panel" id="panel-perbandingan">
+
+  <div class="card mb-4">
+    <div class="card-head"><span class="card-title">Tabel Perbandingan Gaya Investasi</span></div>
+    <div class="card-body">
+      <div class="table-wrap">
+        <table class="cmp-table">
+          <thead>
+            <tr>
+              <th>Investor</th>
+              <th>Jumlah Saham</th>
+              <th>Sektor Favorit</th>
+              <th>Gaya Akumulasi</th>
+              <th>Dividen Focus</th>
+              <th>Risiko Utama</th>
+              <th>Contoh Saham</th>
+            </tr>
+          </thead>
+          <tbody id="cmp-body">
+    <tr>
+      <td><span class="inv-dot" style="background:var(--lkh)"></span><b>Lo Kheng Hong</b></td>
+      <td>13 + hidden</td>
+      <td>Properti, Media, Ban, Sawit</td>
+      <td>Deep discount, akumulasi pelan second liner</td>
+      <td>Moderat, fokus diskon</td>
+      <td style="color:var(--muted)">Likuiditas rendah, suspensi (SRIL)</td>
+      <td><code style="font-size:11px">DILD, SIMP, BMTR, GJTL</code></td>
+    </tr>
+  
+    <tr>
+      <td><span class="inv-dot" style="background:var(--sandi)"></span><b>Sandiaga Uno</b></td>
+      <td>9 via SRTG (21,51%)</td>
+      <td>Tambang, Infra Menara, Energi</td>
+      <td>Private equity via holding, buy-build-sell</td>
+      <td>Tinggi: Rp1,26T dari ADRO MPMX TBIG</td>
+      <td style="color:var(--muted)">Konsentrasi tambang, NAV fluktuatif</td>
+      <td><code style="font-size:11px">MDKA, TBIG, ADRO, MPMX</code></td>
+    </tr>
+  
+    <tr>
+      <td><span class="inv-dot" style="background:var(--teguh)"></span><b>Teguh Hidayat</b></td>
+      <td>10 watchlist, max 12</td>
+      <td>Bank Big 4, Telco, Energi</td>
+      <td>Fokus 7-12 saham, hold compounding</td>
+      <td>Tinggi bank + ADRO 48% yield on cost</td>
+      <td style="color:var(--muted)">Konsentrasi bank, siklikal komoditas</td>
+      <td><code style="font-size:11px">BBCA, BBRI, TLKM, ADRO</code></td>
+    </tr>
+  </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail holdings -->
+  <div class="three-col">
+    <div class="card">
+      <div class="card-head" style="border-left:3px solid var(--lkh);border-radius:0;">
+        <div>
+          <div class="card-title" style="color:var(--lkh)">LKH — Holdings Detail</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">13 emiten · KSEI Maret 2026</div>
+        </div>
+      </div>
+      <div class="card-body" style="padding:0;">
+        <table class="live-table" id="lkh-detail-table" style="font-size:12px;">
+    <thead>
+      <tr>
+        <th>Kode</th>
+        <th style="text-align:right">%</th>
+        <th style="text-align:right">Harga</th>
+        <th style="text-align:left">Sektor</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">DILD</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">6.92%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">125</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Properti</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">GJTL</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">6.68%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.130</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Ban</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">BMTR</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">6.43%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">181</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Media</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">ABMM</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">5.64%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">3.080</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Energi</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">SIMP</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">4.97%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">565</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Sawit</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">CFIN</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.9%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">338</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Keuangan</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">BEST</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.45%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">101</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Industrial Estate</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">LSIP</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.31%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.450</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Sawit</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">ADMG <span style="font-size:10px;color:var(--muted);font-weight:400">reverse split</span></td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.29%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">214</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Kimia</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">MAIN</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.24%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">830</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Pakan</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">PNIN</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.23%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">765</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Investasi</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">RALS</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">2.84%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">380</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Ritel</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">SRIL <span style="font-size:10px;color:var(--muted);font-weight:400">suspensi</span></td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.02%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">100</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Tekstil</td>
+        </tr>
+      
+    </tbody>
+  </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head" style="border-left:3px solid var(--sandi);border-radius:0;">
+        <div>
+          <div class="card-title" style="color:var(--sandi)">Sandiaga — Holdings Detail</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">9 via SRTG · NAV Rp53,99T</div>
+        </div>
+      </div>
+      <div class="card-body" style="padding:0;">
+        <table class="live-table" id="sandi-detail-table" style="font-size:12px;">
+    <thead>
+      <tr>
+        <th>Kode</th>
+        <th style="text-align:right">%</th>
+        <th style="text-align:right">Harga</th>
+        <th style="text-align:left">Sektor</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">SRTG <span style="font-size:10px;color:var(--muted);font-weight:400">Edwin 33,19% · Unitras 32,72%</span></td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">21.51%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.560</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Holding</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">MDKA</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">19.47%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">2.200</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Tambang</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">TBIG</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">9.13%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.640</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Infra Menara</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">MPMX</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">6%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.090</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Otomotif</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">ADRO</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">4%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">2.260</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Energi</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">PALM</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">3.2%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">580</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Sawit</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">AADI</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">2.1%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">8.275</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Energi</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">AGII</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.8%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">720</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Gas Industri</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">NRCA <span style="font-size:10px;color:var(--muted);font-weight:400">Dilepas Nov-Des 2025</span></td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">0%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">340</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Konstruksi</td>
+        </tr>
+      
+    </tbody>
+  </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head" style="border-left:3px solid var(--teguh);border-radius:0;">
+        <div>
+          <div class="card-title" style="color:var(--teguh)">Teguh — Holdings Detail</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">10 saham · max 12</div>
+        </div>
+      </div>
+      <div class="card-body" style="padding:0;">
+        <table class="live-table" id="teguh-detail-table" style="font-size:12px;">
+    <thead>
+      <tr>
+        <th>Kode</th>
+        <th style="text-align:right">Bobot</th>
+        <th style="text-align:right">Harga</th>
+        <th style="text-align:left">Sektor</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">BBCA</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">15%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">6.175</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Bank</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">BBRI</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">15%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">2.790</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Bank</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">BMRI</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">12%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">4.050</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Bank</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">BBNI</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">12%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">3.430</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Bank</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">TLKM</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">10%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">2.380</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Telco</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">ADRO</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">10%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">2.260</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Energi</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">INDF</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">8%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">6.775</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Consumer</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">HRTA</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">7%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">1.805</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Emas</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">APLN</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">6%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">130</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Properti</td>
+        </tr>
+      
+        <tr>
+          <td style="padding:8px 12px;font-weight:600;font-size:12px">AADI</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">5%</td>
+          <td style="padding:8px 12px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums">8.275</td>
+          <td style="padding:8px 12px;font-size:11.5px;color:var(--muted)">Energi</td>
+        </tr>
+      
+    </tbody>
+  </table>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══ PANEL: SIMULASI LOT ════════════════════════════════════════ -->
+<section class="tab-panel" id="panel-simulasi">
+
+  <div class="card mb-4">
+    <div class="card-head">
+      <span class="card-title">Simulasi Alokasi Lot</span>
+      <span style="font-size:11px;color:var(--muted);margin-left:8px;">1 Lot = 100 Lembar · BEI</span>
+    </div>
+    <div class="card-body">
+      <div class="modal-input-wrap">
+        <label class="modal-label">Modal:</label>
+        <input type="number" class="modal-input" id="modal-input" value="1000000000" step="100000000">
+        <div class="modal-presets">
+          <button class="preset-btn" data-val="100000000">Rp100jt</button>
+          <button class="preset-btn" data-val="500000000">Rp500jt</button>
+          <button class="preset-btn active" data-val="1000000000">Rp1M</button>
+          <button class="preset-btn" data-val="2000000000">Rp2M</button>
+          <button class="preset-btn" data-val="5000000000">Rp5M</button>
+        </div>
+      </div>
+      <div style="font-size:11.5px;color:var(--muted);margin-bottom:16px;">Bobot tiap saham dihitung equal-weight dalam portofolio masing-masing investor. Harga dapat diedit di panel <b>Harga Live</b>.</div>
+    </div>
+  </div>
+
+  <div class="sim-grid" id="sim-grid">
+      <div class="sim-card">
+        <div class="sim-head">
+          <span class="sim-head-name" style="color:var(--teguh)">Teguh Hidayat</span>
+          <span class="sim-head-total">Rp1.00M</span>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="sim-table">
+            <thead>
+              <tr>
+                <th>Kode</th>
+                <th>Harga</th>
+                <th>Lot</th>
+                <th>Nilai Beli</th>
+                <th>Sisa</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>BBCA</td>
+                  <td>6.175</td>
+                  <td style="color:var(--teguh);font-weight:700">242</td>
+                  <td>Rp149.4jt</td>
+                  <td style="color:var(--muted)">Rp565.000</td>
+                </tr>
+              
+                <tr>
+                  <td>BBRI</td>
+                  <td>2.790</td>
+                  <td style="color:var(--teguh);font-weight:700">537</td>
+                  <td>Rp149.8jt</td>
+                  <td style="color:var(--muted)">Rp177.000</td>
+                </tr>
+              
+                <tr>
+                  <td>BMRI</td>
+                  <td>4.050</td>
+                  <td style="color:var(--teguh);font-weight:700">296</td>
+                  <td>Rp119.9jt</td>
+                  <td style="color:var(--muted)">Rp120.000</td>
+                </tr>
+              
+                <tr>
+                  <td>BBNI</td>
+                  <td>3.430</td>
+                  <td style="color:var(--teguh);font-weight:700">349</td>
+                  <td>Rp119.7jt</td>
+                  <td style="color:var(--muted)">Rp293.000</td>
+                </tr>
+              
+                <tr>
+                  <td>TLKM</td>
+                  <td>2.380</td>
+                  <td style="color:var(--teguh);font-weight:700">420</td>
+                  <td>Rp100.0jt</td>
+                  <td style="color:var(--muted)">Rp40.000</td>
+                </tr>
+              
+                <tr>
+                  <td>ADRO</td>
+                  <td>2.260</td>
+                  <td style="color:var(--teguh);font-weight:700">442</td>
+                  <td>Rp99.9jt</td>
+                  <td style="color:var(--muted)">Rp108.000</td>
+                </tr>
+              
+                <tr>
+                  <td>INDF</td>
+                  <td>6.775</td>
+                  <td style="color:var(--teguh);font-weight:700">118</td>
+                  <td>Rp79.9jt</td>
+                  <td style="color:var(--muted)">Rp55.000</td>
+                </tr>
+              
+                <tr>
+                  <td>HRTA</td>
+                  <td>1.805</td>
+                  <td style="color:var(--teguh);font-weight:700">387</td>
+                  <td>Rp69.9jt</td>
+                  <td style="color:var(--muted)">Rp146.500</td>
+                </tr>
+              
+                <tr>
+                  <td>APLN</td>
+                  <td>130</td>
+                  <td style="color:var(--teguh);font-weight:700">4.615</td>
+                  <td>Rp60.0jt</td>
+                  <td style="color:var(--muted)">Rp5.000</td>
+                </tr>
+              
+                <tr>
+                  <td>AADI</td>
+                  <td>8.275</td>
+                  <td style="color:var(--teguh);font-weight:700">60</td>
+                  <td>Rp49.6jt</td>
+                  <td style="color:var(--muted)">Rp350.000</td>
+                </tr>
+              
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2" style="color:var(--muted);font-size:11px">TOTAL</td>
+                <td style="color:var(--teguh);font-size:14px">7.466 lot</td>
+                <td>Rp998.1jt</td>
+                <td style="color:var(--muted)">Rp1.9jt</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="sim-foot">
+          <div class="sim-foot-row">
+            <span class="lbl">Modal</span>
+            <span class="val">Rp1.00M</span>
+          </div>
+          <div class="sim-foot-row">
+            <span class="lbl">Nilai Terpakai</span>
+            <span class="val">Rp998.1jt</span>
+          </div>
+          <div class="sim-foot-row highlight">
+            <span class="lbl">Cash Sisa</span>
+            <span class="val" style="color:var(--teguh)">Rp1.9jt</span>
+          </div>
+        </div>
+      </div>
+    
+      <div class="sim-card">
+        <div class="sim-head">
+          <span class="sim-head-name" style="color:var(--lkh)">Lo Kheng Hong</span>
+          <span class="sim-head-total">Rp1.00M</span>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="sim-table">
+            <thead>
+              <tr>
+                <th>Kode</th>
+                <th>Harga</th>
+                <th>Lot</th>
+                <th>Nilai Beli</th>
+                <th>Sisa</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>DILD</td>
+                  <td>125</td>
+                  <td style="color:var(--lkh);font-weight:700">6.153</td>
+                  <td>Rp76.9jt</td>
+                  <td style="color:var(--muted)">Rp10.577</td>
+                </tr>
+              
+                <tr>
+                  <td>GJTL</td>
+                  <td>1.130</td>
+                  <td style="color:var(--lkh);font-weight:700">680</td>
+                  <td>Rp76.8jt</td>
+                  <td style="color:var(--muted)">Rp83.077</td>
+                </tr>
+              
+                <tr>
+                  <td>BMTR</td>
+                  <td>181</td>
+                  <td style="color:var(--lkh);font-weight:700">4.249</td>
+                  <td>Rp76.9jt</td>
+                  <td style="color:var(--muted)">Rp16.177</td>
+                </tr>
+              
+                <tr>
+                  <td>ABMM</td>
+                  <td>3.080</td>
+                  <td style="color:var(--lkh);font-weight:700">249</td>
+                  <td>Rp76.7jt</td>
+                  <td style="color:var(--muted)">Rp231.077</td>
+                </tr>
+              
+                <tr>
+                  <td>SIMP</td>
+                  <td>565</td>
+                  <td style="color:var(--lkh);font-weight:700">1.361</td>
+                  <td>Rp76.9jt</td>
+                  <td style="color:var(--muted)">Rp26.577</td>
+                </tr>
+              
+                <tr>
+                  <td>CFIN</td>
+                  <td>338</td>
+                  <td style="color:var(--lkh);font-weight:700">2.275</td>
+                  <td>Rp76.9jt</td>
+                  <td style="color:var(--muted)">Rp28.077</td>
+                </tr>
+              
+                <tr>
+                  <td>BEST</td>
+                  <td>101</td>
+                  <td style="color:var(--lkh);font-weight:700">7.616</td>
+                  <td>Rp76.9jt</td>
+                  <td style="color:var(--muted)">Rp1.477</td>
+                </tr>
+              
+                <tr>
+                  <td>LSIP</td>
+                  <td>1.450</td>
+                  <td style="color:var(--lkh);font-weight:700">530</td>
+                  <td>Rp76.8jt</td>
+                  <td style="color:var(--muted)">Rp73.077</td>
+                </tr>
+              
+                <tr>
+                  <td>ADMG</td>
+                  <td>214</td>
+                  <td style="color:var(--lkh);font-weight:700">3.594</td>
+                  <td>Rp76.9jt</td>
+                  <td style="color:var(--muted)">Rp11.477</td>
+                </tr>
+              
+                <tr>
+                  <td>MAIN</td>
+                  <td>830</td>
+                  <td style="color:var(--lkh);font-weight:700">926</td>
+                  <td>Rp76.9jt</td>
+                  <td style="color:var(--muted)">Rp65.077</td>
+                </tr>
+              
+                <tr>
+                  <td>PNIN</td>
+                  <td>765</td>
+                  <td style="color:var(--lkh);font-weight:700">1.005</td>
+                  <td>Rp76.9jt</td>
+                  <td style="color:var(--muted)">Rp40.577</td>
+                </tr>
+              
+                <tr>
+                  <td>RALS</td>
+                  <td>380</td>
+                  <td style="color:var(--lkh);font-weight:700">2.024</td>
+                  <td>Rp76.9jt</td>
+                  <td style="color:var(--muted)">Rp11.077</td>
+                </tr>
+              
+                <tr>
+                  <td>SRIL</td>
+                  <td>100</td>
+                  <td style="color:var(--lkh);font-weight:700">7.692</td>
+                  <td>Rp76.9jt</td>
+                  <td style="color:var(--muted)">Rp3.077</td>
+                </tr>
+              
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2" style="color:var(--muted);font-size:11px">TOTAL</td>
+                <td style="color:var(--lkh);font-size:14px">38.354 lot</td>
+                <td>Rp999.4jt</td>
+                <td style="color:var(--muted)">Rp601.400</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="sim-foot">
+          <div class="sim-foot-row">
+            <span class="lbl">Modal</span>
+            <span class="val">Rp1.00M</span>
+          </div>
+          <div class="sim-foot-row">
+            <span class="lbl">Nilai Terpakai</span>
+            <span class="val">Rp999.4jt</span>
+          </div>
+          <div class="sim-foot-row highlight">
+            <span class="lbl">Cash Sisa</span>
+            <span class="val" style="color:var(--lkh)">Rp601.400</span>
+          </div>
+        </div>
+      </div>
+    
+      <div class="sim-card">
+        <div class="sim-head">
+          <span class="sim-head-name" style="color:var(--sandi)">Sandiaga Uno</span>
+          <span class="sim-head-total">Rp1.00M</span>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="sim-table">
+            <thead>
+              <tr>
+                <th>Kode</th>
+                <th>Harga</th>
+                <th>Lot</th>
+                <th>Nilai Beli</th>
+                <th>Sisa</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>SRTG</td>
+                  <td>1.560</td>
+                  <td style="color:var(--sandi);font-weight:700">712</td>
+                  <td>Rp111.1jt</td>
+                  <td style="color:var(--muted)">Rp39.111</td>
+                </tr>
+              
+                <tr>
+                  <td>MDKA</td>
+                  <td>2.200</td>
+                  <td style="color:var(--sandi);font-weight:700">505</td>
+                  <td>Rp111.1jt</td>
+                  <td style="color:var(--muted)">Rp11.111</td>
+                </tr>
+              
+                <tr>
+                  <td>TBIG</td>
+                  <td>1.640</td>
+                  <td style="color:var(--sandi);font-weight:700">677</td>
+                  <td>Rp111.0jt</td>
+                  <td style="color:var(--muted)">Rp83.111</td>
+                </tr>
+              
+                <tr>
+                  <td>MPMX</td>
+                  <td>1.090</td>
+                  <td style="color:var(--sandi);font-weight:700">1.019</td>
+                  <td>Rp111.1jt</td>
+                  <td style="color:var(--muted)">Rp40.111</td>
+                </tr>
+              
+                <tr>
+                  <td>ADRO</td>
+                  <td>2.260</td>
+                  <td style="color:var(--sandi);font-weight:700">491</td>
+                  <td>Rp111.0jt</td>
+                  <td style="color:var(--muted)">Rp145.111</td>
+                </tr>
+              
+                <tr>
+                  <td>PALM</td>
+                  <td>580</td>
+                  <td style="color:var(--sandi);font-weight:700">1.915</td>
+                  <td>Rp111.1jt</td>
+                  <td style="color:var(--muted)">Rp41.111</td>
+                </tr>
+              
+                <tr>
+                  <td>AADI</td>
+                  <td>8.275</td>
+                  <td style="color:var(--sandi);font-weight:700">134</td>
+                  <td>Rp110.9jt</td>
+                  <td style="color:var(--muted)">Rp226.111</td>
+                </tr>
+              
+                <tr>
+                  <td>AGII</td>
+                  <td>720</td>
+                  <td style="color:var(--sandi);font-weight:700">1.543</td>
+                  <td>Rp111.1jt</td>
+                  <td style="color:var(--muted)">Rp15.111</td>
+                </tr>
+              
+                <tr>
+                  <td>NRCA</td>
+                  <td>340</td>
+                  <td style="color:var(--sandi);font-weight:700">3.267</td>
+                  <td>Rp111.1jt</td>
+                  <td style="color:var(--muted)">Rp33.111</td>
+                </tr>
+              
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2" style="color:var(--muted);font-size:11px">TOTAL</td>
+                <td style="color:var(--sandi);font-size:14px">10.263 lot</td>
+                <td>Rp999.4jt</td>
+                <td style="color:var(--muted)">Rp634.000</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="sim-foot">
+          <div class="sim-foot-row">
+            <span class="lbl">Modal</span>
+            <span class="val">Rp1.00M</span>
+          </div>
+          <div class="sim-foot-row">
+            <span class="lbl">Nilai Terpakai</span>
+            <span class="val">Rp999.4jt</span>
+          </div>
+          <div class="sim-foot-row highlight">
+            <span class="lbl">Cash Sisa</span>
+            <span class="val" style="color:var(--sandi)">Rp634.000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="card mt-4">
+    <div class="card-head"><span class="card-title">Catatan Metodologi</span></div>
+    <div class="card-body">
+      <ul class="method-list">
+        <li>Teguh 10% per saham (10 saham equal-weight), LKH 100/13 ≈ 7,69%, Sandiaga 100/9 ≈ 11,11%</li>
+        <li>Alokasi = Modal × Bobot, Lot = floor((Alokasi ÷ Harga) ÷ 100)</li>
+        <li>Lembar beli = Lot × 100; Nilai beli = Lembar × Harga; Sisa kas = Alokasi − Nilai beli</li>
+        <li>Jika harga diedit ke 0, baris tersebut tidak dihitung dalam total lot</li>
+        <li>Harga default menggunakan data KSEI per Apr–Mei 2026. Update live via Yahoo Finance di tab Harga Live</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══ PANEL: HARGA LIVE ══════════════════════════════════════════ -->
+<section class="tab-panel" id="panel-live">
+
+  <div class="card mb-4">
+    <div class="card-head">
+      <span class="card-title">Update Harga Live — Yahoo Finance</span>
+    </div>
+    <div class="card-body">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+        <div class="live-tabs">
+          <button class="live-tab active" data-inv="TEGUH">Teguh</button>
+          <button class="live-tab" data-inv="LKH">LKH</button>
+          <button class="live-tab" data-inv="SANDIAGA">Sandiaga</button>
+          <button class="live-tab" data-inv="ALL">Semua</button>
+        </div>
+        <button class="update-btn" id="fetch-btn">
+          <svg id="fetch-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+          Update Live
+        </button>
+        <span id="fetch-status" style="font-size:12px;color:var(--muted);"></span>
+      </div>
+      <div id="live-tables">
+      <div style="margin-bottom:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--teguh);margin-bottom:8px">Teguh Hidayat</div>
+        <div style="overflow-x:auto">
+          <table class="live-table">
+            <thead><tr>
+              <th>Kode</th>
+              <th>Sektor</th>
+              <th>Harga (editable)</th>
+              <th>Status</th>
+            </tr></thead>
+            <tbody>
+              
+                <tr>
+                  <td><b>BBCA</b></td>
+                  <td style="color:var(--muted)">Bank</td>
+                  <td>
+                    <input type="number" class="live-price-input" data-code="BBCA" value="6175">
+                  </td>
+                  <td><span class="status-pill status-cached" id="status-BBCA">CACHED</span></td>
+                </tr>
+              
+                <tr>
+                  <td><b>BBRI</b></td>
+                  <td style="color:var(--muted)">Bank</td>
+                  <td>
+                    <input type="number" class="live-price-input" data-code="BBRI" value="2790">
+                  </td>
+                  <td><span class="status-pill status-cached" id="status-BBRI">CACHED</span></td>
+                </tr>
+              
+                <tr>
+                  <td><b>BMRI</b></td>
+                  <td style="color:var(--muted)">Bank</td>
+                  <td>
+                    <input type="number" class="live-price-input" data-code="BMRI" value="4050">
+                  </td>
+                  <td><span class="status-pill status-cached" id="status-BMRI">CACHED</span></td>
+                </tr>
+              
+                <tr>
+                  <td><b>BBNI</b></td>
+                  <td style="color:var(--muted)">Bank</td>
+                  <td>
+                    <input type="number" class="live-price-input" data-code="BBNI" value="3430">
+                  </td>
+                  <td><span class="status-pill status-cached" id="status-BBNI">CACHED</span></td>
+                </tr>
+              
+                <tr>
+                  <td><b>TLKM</b></td>
+                  <td style="color:var(--muted)">Telco</td>
+                  <td>
+                    <input type="number" class="live-price-input" data-code="TLKM" value="2380">
+                  </td>
+                  <td><span class="status-pill status-cached" id="status-TLKM">CACHED</span></td>
+                </tr>
+              
+                <tr>
+                  <td><b>ADRO</b></td>
+                  <td style="color:var(--muted)">Energi</td>
+                  <td>
+                    <input type="number" class="live-price-input" data-code="ADRO" value="2260">
+                  </td>
+                  <td><span class="status-pill status-cached" id="status-ADRO">CACHED</span></td>
+                </tr>
+              
+                <tr>
+                  <td><b>INDF</b></td>
+                  <td style="color:var(--muted)">Consumer</td>
+                  <td>
+                    <input type="number" class="live-price-input" data-code="INDF" value="6775">
+                  </td>
+                  <td><span class="status-pill status-cached" id="status-INDF">CACHED</span></td>
+                </tr>
+              
+                <tr>
+                  <td><b>HRTA</b></td>
+                  <td style="color:var(--muted)">Emas</td>
+                  <td>
+                    <input type="number" class="live-price-input" data-code="HRTA" value="1805">
+                  </td>
+                  <td><span class="status-pill status-cached" id="status-HRTA">CACHED</span></td>
+                </tr>
+              
+                <tr>
+                  <td><b>APLN</b></td>
+                  <td style="color:var(--muted)">Properti</td>
+                  <td>
+                    <input type="number" class="live-price-input" data-code="APLN" value="130">
+                  </td>
+                  <td><span class="status-pill status-cached" id="status-APLN">CACHED</span></td>
+                </tr>
+              
+                <tr>
+                  <td><b>AADI</b></td>
+                  <td style="color:var(--muted)">Energi</td>
+                  <td>
+                    <input type="number" class="live-price-input" data-code="AADI" value="8275">
+                  </td>
+                  <td><span class="status-pill status-cached" id="status-AADI">CACHED</span></td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+      <div style="margin-top:14px;padding:12px 16px;background:#FAFAFA;border:1px solid var(--border);border-radius:10px;">
+        <div style="font-size:11.5px;color:var(--muted);">
+          Harga yang diedit manual atau diupdate live akan langsung dipakai di Simulasi Lot.
+          Sumber: <code>api.allorigins.win → finance.yahoo.com</code> — butuh koneksi internet.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══ PANEL: FEED KSEI ═══════════════════════════════════════════ -->
+<section class="tab-panel" id="panel-feed">
+
+  <div class="two-col">
+    <div>
+      <div class="feed-controls">
+        <div class="feed-filter">
+          <button class="filter-btn active" data-filter="all">Semua</button>
+          <button class="filter-btn" data-filter="LKH" style="border-color:var(--lkh-border);color:var(--lkh);">LKH</button>
+          <button class="filter-btn" data-filter="SANDI" style="border-color:var(--sandi-border);color:var(--sandi);">Sandiaga</button>
+          <button class="filter-btn" data-filter="TEGUH" style="border-color:var(--teguh-border);color:var(--teguh);">Teguh</button>
+        </div>
+        <button class="sim-feed-btn">⚡ Simulasi Update KSEI</button>
+      </div>
+      <div class="feed-list" id="feed-list">
+    <div class="feed-item">
+      <div class="feed-avatar" style="background:var(--lkh)22;color:var(--lkh)">LKH</div>
+      <div class="feed-body">
+        <div class="feed-header">
+          <span class="feed-name" style="color:var(--lkh)">Lo Kheng Hong</span>
+          <span class="feed-type type-akumulasi">akumulasi</span>
+          <span class="feed-time">1 jam lalu</span>
+        </div>
+        <div class="feed-text">SIMP tembus &gt;5% Mei (793,64jt) setelah borong 22,62jt saham</div>
+      </div>
+    </div>
+  
+    <div class="feed-item">
+      <div class="feed-avatar" style="background:var(--lkh)22;color:var(--lkh)">LKH</div>
+      <div class="feed-body">
+        <div class="feed-header">
+          <span class="feed-name" style="color:var(--lkh)">Lo Kheng Hong</span>
+          <span class="feed-type type-akumulasi">akumulasi</span>
+          <span class="feed-time">3 jam lalu</span>
+        </div>
+        <div class="feed-text">DILD akumulasi 4 bulan beruntun → 733,68jt (7,08%)</div>
+      </div>
+    </div>
+  
+    <div class="feed-item">
+      <div class="feed-avatar" style="background:var(--sandi)22;color:var(--sandi)">SI</div>
+      <div class="feed-body">
+        <div class="feed-header">
+          <span class="feed-name" style="color:var(--sandi)">Sandiaga Uno</span>
+          <span class="feed-type type-distribusi">distribusi</span>
+          <span class="feed-time">5 jam lalu</span>
+        </div>
+        <div class="feed-text">MDKA jual 211,1jt saham @Rp1.925 (Agt 2025) porsi turun 20,34%→19,47%</div>
+      </div>
+    </div>
+  
+    <div class="feed-item">
+      <div class="feed-avatar" style="background:var(--sandi)22;color:var(--sandi)">SI</div>
+      <div class="feed-body">
+        <div class="feed-header">
+          <span class="feed-name" style="color:var(--sandi)">Sandiaga Uno</span>
+          <span class="feed-type type-akumulasi">akumulasi</span>
+          <span class="feed-time">1 hari lalu</span>
+        </div>
+        <div class="feed-text">MDKA sempat tambah 121,76jt saham, naik 19,58%→20,08%</div>
+      </div>
+    </div>
+  
+    <div class="feed-item">
+      <div class="feed-avatar" style="background:var(--sandi)22;color:var(--sandi)">SI</div>
+      <div class="feed-body">
+        <div class="feed-header">
+          <span class="feed-name" style="color:var(--sandi)">Sandiaga Uno</span>
+          <span class="feed-type type-exit">exit</span>
+          <span class="feed-time">2 hari lalu</span>
+        </div>
+        <div class="feed-text">NRCA lepas 21,3jt saham Nov-Des 2025, exit konstruksi</div>
+      </div>
+    </div>
+  
+    <div class="feed-item">
+      <div class="feed-avatar" style="background:var(--sandi)22;color:var(--sandi)">SI</div>
+      <div class="feed-body">
+        <div class="feed-header">
+          <span class="feed-name" style="color:var(--sandi)">Sandiaga Uno</span>
+          <span class="feed-type type-exit">exit</span>
+          <span class="feed-time">arsip</span>
+        </div>
+        <div class="feed-text">PRAY divestasi penuh 425,44jt Feb 2023</div>
+      </div>
+    </div>
+  
+    <div class="feed-item">
+      <div class="feed-avatar" style="background:var(--teguh)22;color:var(--teguh)">TH</div>
+      <div class="feed-body">
+        <div class="feed-header">
+          <span class="feed-name" style="color:var(--teguh)">Teguh Hidayat</span>
+          <span class="feed-type type-dividen">dividen</span>
+          <span class="feed-time">5 jam lalu</span>
+        </div>
+        <div class="feed-text">ADRO cum dividen Rp1.350 (modal 2.800) + potensi spin-off AADI</div>
+      </div>
+    </div>
+  
+    <div class="feed-item">
+      <div class="feed-avatar" style="background:var(--teguh)22;color:var(--teguh)">TH</div>
+      <div class="feed-body">
+        <div class="feed-header">
+          <span class="feed-name" style="color:var(--teguh)">Teguh Hidayat</span>
+          <span class="feed-type type-akumulasi">akumulasi</span>
+          <span class="feed-time">1 hari lalu</span>
+        </div>
+        <div class="feed-text">BBNI akumulasi — PBV 1,3x termurah di Himbara</div>
+      </div>
+    </div>
+  </div>
+      <div class="custom-feed-row">
+        <select id="custom-inv">
+          <option value="LKH">LKH</option>
+          <option value="SANDI">Sandiaga</option>
+          <option value="TEGUH">Teguh</option>
+        </select>
+        <input type="text" id="custom-text" placeholder="Catatan custom KSEI...">
+        <button class="add-feed-btn">+ Tambah</button>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="card">
+        <div class="card-head"><span class="card-title">Wajib Lapor KSEI</span></div>
+        <div class="card-body" style="font-size:12px;color:var(--muted);line-height:1.7;">
+          Berdasarkan POJK, kepemilikan saham ≥5% wajib dilaporkan ke OJK &amp; KSEI dalam 10 hari kerja.
+          <br><br>
+          <b style="color:var(--text)">LKH — Trigger Aktif:</b><br>
+          • DILD: 6,92% → wajib lapor setiap ada perubahan<br>
+          • GJTL: 6,68% → wajib lapor<br>
+          • SIMP: 4,97% → alert &gt;5% Mei (793,64jt)<br>
+          • BMTR: 6,43% → wajib lapor<br>
+          <br>
+          <b style="color:var(--text)">Sandiaga — Via SRTG:</b><br>
+          • SRTG: 21,51% direct → dilaporkan Edwin &amp; Unitras<br>
+          • MDKA: 19,47% → sempat tambah 121,76jt lalu jual 211,1jt<br>
+          <br>
+          <b style="color:var(--text)">Teguh — Watchlist:</b><br>
+          • BBNI: PBV 1,3x — termurah Himbara, potensi akumulasi
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="card-title">Alert Center</span></div>
+        <div class="card-body" style="display:flex;flex-direction:column;gap:8px;font-size:12px;">
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--lkh-bg);border-radius:8px;">
+            <span style="color:var(--lkh);font-weight:700;">LKH</span>
+            <span style="color:var(--muted);">SIMP &gt;5% alert — 793,64jt lembar</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--lkh-bg);border-radius:8px;">
+            <span style="color:var(--lkh);font-weight:700;">LKH</span>
+            <span style="color:var(--muted);">DILD 4 bulan akumulasi beruntun</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--sandi-bg);border-radius:8px;">
+            <span style="color:var(--sandi);font-weight:700;">SANDI</span>
+            <span style="color:var(--muted);">MDKA jual 211jt — porsi 19,47%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--teguh-bg);border-radius:8px;">
+            <span style="color:var(--teguh);font-weight:700;">TEGUH</span>
+            <span style="color:var(--muted);">ADRO dividen Rp1.350 · BBNI PBV 1,3x</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div><!-- /main-wrap -->
+
+<div class="toast" id="toast"></div>
+
+
+
+
+    </div>
+  </div>
+
+  <style>
+    .portfolio-modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      overflow: auto;
+    }
+
+    .portfolio-modal.show {
+      display: block;
+    }
+
+    .portfolio-modal-content {
+      background-color: #1a1a2e;
+      margin: 20px auto;
+      max-width: 1400px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 8px;
+    }
+
+    .portfolio-modal-close {
+      position: sticky;
+      top: 10px;
+      right: 20px;
+      float: right;
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+      background: rgba(255, 77, 77, 0.8);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 10001;
+      transition: all 0.3s ease;
+    }
+
+    .portfolio-modal-close:hover {
+      background: rgba(255, 77, 77, 1);
+    }
+
+    #portfolioBtn {
+      position: fixed;
+      left: 20px;
+      top: 100px;
+      z-index: 9998;
+      background: rgba(79, 70, 229, 0.9);
+      border: 2px solid rgba(150, 170, 240, 0.7);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95em;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    #portfolioBtn:hover {
+      background: rgba(99, 90, 255, 1);
+      border-color: rgba(200, 200, 255, 1);
+    }
+
+    body.dark-mode #portfolioBtn {
+      background: rgba(79, 70, 229, 0.9);
+      border-color: rgba(150, 170, 240, 0.7);
+    }
+
+    body.dark-mode #portfolioBtn:hover {
+      background: rgba(99, 90, 255, 1);
+      border-color: rgba(200, 200, 255, 1);
+    }
+  </style>
+
+  <button id="portfolioBtn">📊 My Portfolio</button>
+
+  <script>
+    const portfolioModal = document.getElementById('portfolioModal');
+    const portfolioBtn = document.getElementById('portfolioBtn');
+    const portfolioClose = document.querySelector('.portfolio-modal-close');
+
+    portfolioBtn.addEventListener('click', () => {
+      portfolioModal.classList.add('show');
+    });
+
+    portfolioClose.addEventListener('click', () => {
+      portfolioModal.classList.remove('show');
+    });
+
+    window.addEventListener('click', (event) => {
+      if (event.target === portfolioModal) {
+        portfolioModal.classList.remove('show');
+      }
+    });
+  </script>
 </body>
 </html>
