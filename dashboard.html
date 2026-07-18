@@ -265,6 +265,267 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     } else {
       addWatchlistTab();
     }
+
+    // Add Entry Journal Feature
+    function addJournalEntryFeature() {
+      // Create modal styles
+      const modalStyles = document.createElement('style');
+      modalStyles.textContent = `
+        .journal-modal {
+          display: none;
+          position: fixed;
+          z-index: 2000;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.7);
+          animation: fadeIn 0.3s ease;
+        }
+
+        .journal-modal.active {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .journal-modal-content {
+          background: #1a1a2e;
+          padding: 30px;
+          border-radius: 12px;
+          border: 1px solid #404060;
+          max-width: 500px;
+          width: 90%;
+          max-height: 80vh;
+          overflow-y: auto;
+          animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+          from { transform: translateY(-50px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+
+        .journal-modal-header {
+          color: #f0f0f0;
+          font-size: 1.5em;
+          font-weight: 600;
+          margin-bottom: 20px;
+          padding-bottom: 15px;
+          border-bottom: 1px solid #404060;
+        }
+
+        .journal-form-group {
+          margin-bottom: 15px;
+        }
+
+        .journal-form-group label {
+          color: #b0b0b0;
+          font-size: 0.85em;
+          font-weight: 600;
+          display: block;
+          margin-bottom: 8px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .journal-form-group input,
+        .journal-form-group textarea,
+        .journal-form-group select {
+          width: 100%;
+          padding: 10px 12px;
+          background: #16213e;
+          color: #f0f0f0;
+          border: 1px solid #404060;
+          border-radius: 8px;
+          font-family: inherit;
+          font-size: 0.95em;
+          transition: border-color 0.2s;
+        }
+
+        .journal-form-group input:focus,
+        .journal-form-group textarea:focus,
+        .journal-form-group select:focus {
+          outline: none;
+          border-color: #FF7A00;
+        }
+
+        .journal-form-group textarea {
+          resize: vertical;
+          min-height: 80px;
+          font-family: monospace;
+        }
+
+        .journal-form-buttons {
+          display: flex;
+          gap: 10px;
+          margin-top: 20px;
+          padding-top: 20px;
+          border-top: 1px solid #404060;
+        }
+
+        .journal-btn {
+          flex: 1;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          font-size: 0.95em;
+        }
+
+        .journal-btn-submit {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+        }
+
+        .journal-btn-submit:hover {
+          opacity: 0.9;
+          transform: translateY(-2px);
+        }
+
+        .journal-btn-cancel {
+          background: #404060;
+          color: #f0f0f0;
+        }
+
+        .journal-btn-cancel:hover {
+          background: #505070;
+        }
+
+        .journal-entry-btn {
+          position: fixed;
+          bottom: 20px;
+          left: 20px;
+          padding: 12px 20px;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          border: none;
+          border-radius: 50px;
+          cursor: pointer;
+          font-size: 1em;
+          font-weight: 600;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+          z-index: 1000;
+          transition: all 0.3s ease;
+        }
+
+        .journal-entry-btn:hover {
+          transform: scale(1.05);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+      `;
+      document.head.appendChild(modalStyles);
+
+      // Create Add Entry Button
+      const addEntryBtn = document.createElement('button');
+      addEntryBtn.textContent = '📝 Add Entry';
+      addEntryBtn.className = 'journal-entry-btn';
+      addEntryBtn.onclick = () => {
+        modal.classList.add('active');
+      };
+      document.body.appendChild(addEntryBtn);
+
+      // Create Modal
+      const modal = document.createElement('div');
+      modal.className = 'journal-modal';
+      modal.innerHTML = `
+        <div class="journal-modal-content">
+          <div class="journal-modal-header">📝 Tambah Jurnal Entry</div>
+
+          <form id="journalEntryForm">
+            <div class="journal-form-group">
+              <label for="entryDate">Tanggal</label>
+              <input type="date" id="entryDate" name="entryDate" required>
+            </div>
+
+            <div class="journal-form-group">
+              <label for="entryType">Tipe Entry</label>
+              <select id="entryType" name="entryType" required>
+                <option value="">Pilih Tipe</option>
+                <option value="trade">🔄 Trade</option>
+                <option value="analysis">📊 Analysis</option>
+                <option value="note">📝 Catatan</option>
+                <option value="news">📰 News</option>
+                <option value="result">✅ Hasil</option>
+              </select>
+            </div>
+
+            <div class="journal-form-group">
+              <label for="entryStock">Saham (Opsional)</label>
+              <input type="text" id="entryStock" name="entryStock" placeholder="Contoh: BBCA, TLKM">
+            </div>
+
+            <div class="journal-form-group">
+              <label for="entryTitle">Judul</label>
+              <input type="text" id="entryTitle" name="entryTitle" placeholder="Judul entry" required>
+            </div>
+
+            <div class="journal-form-group">
+              <label for="entryContent">Konten/Deskripsi</label>
+              <textarea id="entryContent" name="entryContent" placeholder="Tulis jurnal entry Anda..." required></textarea>
+            </div>
+
+            <div class="journal-form-buttons">
+              <button type="submit" class="journal-btn journal-btn-submit">💾 Simpan Entry</button>
+              <button type="button" class="journal-btn journal-btn-cancel" onclick="document.querySelector('.journal-modal').classList.remove('active')">❌ Batal</button>
+            </div>
+          </form>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      // Set today's date as default
+      const dateInput = document.getElementById('entryDate');
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.value = today;
+
+      // Handle form submission
+      document.getElementById('journalEntryForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const entry = {
+          date: document.getElementById('entryDate').value,
+          type: document.getElementById('entryType').value,
+          stock: document.getElementById('entryStock').value,
+          title: document.getElementById('entryTitle').value,
+          content: document.getElementById('entryContent').value,
+          timestamp: new Date().getTime()
+        };
+
+        // Save to localStorage
+        let entries = JSON.parse(localStorage.getItem('journalEntries') || '[]');
+        entries.push(entry);
+        localStorage.setItem('journalEntries', JSON.stringify(entries));
+
+        // Reset form and close modal
+        this.reset();
+        dateInput.value = today;
+        modal.classList.remove('active');
+
+        // Show success message
+        alert('✅ Entry berhasil disimpan!');
+      });
+
+      // Close modal when clicking outside
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', addJournalEntryFeature);
+    } else {
+      addJournalEntryFeature();
+    }
   </script>
 
 </body>
