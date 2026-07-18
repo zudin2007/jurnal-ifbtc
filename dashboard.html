@@ -63,82 +63,9 @@
       color: #f0f0f0 !important;
       border-color: #404060 !important;
     }
-
-      background: rgba(80, 100, 150, 0.9);
-      border-color: rgba(150, 170, 240, 0.7);
-    }
-  <style>
-    #portfolioLink {
-      position: fixed;
-      top: 50%;
-      left: 20px;
-      transform: translateY(-50%);
-      z-index: 9998;
-      background: rgba(45, 53, 97, 0.9);
-      border: 2px solid rgba(100, 120, 200, 0.5);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.95em;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    #portfolioLink:hover {
-      background: rgba(80, 100, 150, 0.95);
-      border-color: rgba(150, 170, 240, 0.7);
-    }
-
-    body.dark-mode #portfolioLink {
-      background: rgba(45, 53, 97, 0.9);
-      border-color: rgba(100, 120, 200, 0.5);
-    }
-
-    body.dark-mode #portfolioLink:hover {
-      background: rgba(80, 100, 150, 0.95);
-      border-color: rgba(150, 170, 240, 0.7);
-    }
-  </style>
-
-  <a href="MyPortfolio.eml" id="portfolioLink">📊 My Portfolio</a>
-    #themeToggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 9999;
-      background: rgba(255, 255, 255, 0.2);
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 1em;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    #themeToggle:hover {
-      background: rgba(255, 255, 255, 0.3);
-      border-color: rgba(255, 255, 255, 0.5);
-    }
-
-    body.dark-mode #themeToggle {
-      background: rgba(50, 50, 80, 0.8);
-      border-color: rgba(100, 120, 200, 0.5);
-    }
-
-    body.dark-mode #themeToggle:hover {
-      background: rgba(80, 100, 150, 0.9);
-      border-color: rgba(150, 170, 240, 0.7);
-    }
   </style>
 <body>
   <div id="root"></div>
-  <button id="themeToggle">🌙 Dark Mode</button>
-  <a href="MyPortfolio.eml" id="portfolioLink">📊 My Portfolio</a>
   
   <script type="module">var yI=Object.create;var{getPrototypeOf:_I,defineProperty:fX,getOwnPropertyNames:cI}=Object;var dI=Object.prototype.hasOwnProperty;var y=(f,Q,u)=>{u=f!=null?yI(_I(f)):{};let J=Q||!f||!f.__esModule?fX(u,"default",{value:f,enumerable:!0}):u;for(let Z of cI(f))if(!dI.call(J,Z))fX(J,Z,{get:()=>f[Z],enumerable:!0});return J};var g=(f,Q)=>()=>(Q||f((Q={exports:{}}).exports,Q),Q.exports);var AM=(f,Q)=>{for(var u in Q)fX(f,u,{get:Q[u],enumerable:!0,configurable:!0,set:(J)=>Q[u]=()=>J})};var pI=(f,Q)=>()=>(f&&(Q=f(f=0)),Q);var G0=g((NA)=>{var c4=Symbol.for("react.element"),iI=Symbol.for("react.portal"),oI=Symbol.for("react.fragment"),rI=Symbol.for("react.strict_mode"),tI=Symbol.for("react.profiler"),sI=Symbol.for("react.provider"),aI=Symbol.for("react.context"),eI=Symbol.for("react.forward_ref"),fA=Symbol.for("react.suspense"),QA=Symbol.for("react.memo"),uA=Symbol.for("react.lazy"),vM=Symbol.iterator;function JA(f){if(f===null||typeof f!=="object")return null;return f=vM&&f[vM]||f["@@iterator"],typeof f==="function"?f:null}var gM={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}},kM=Object.assign,jM={};function j9(f,Q,u){this.props=f,this.context=Q,this.refs=jM,this.updater=u||gM}j9.prototype.isReactComponent={};j9.prototype.setState=function(f,Q){if(typeof f!=="object"&&typeof f!=="function"&&f!=null)throw Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");this.updater.enqueueSetState(this,f,Q,"setState")};j9.prototype.forceUpdate=function(f){this.updater.enqueueForceUpdate(this,f,"forceUpdate")};function mM(){}mM.prototype=j9.prototype;function uX(f,Q,u){this.props=f,this.context=Q,this.refs=jM,this.updater=u||gM}var JX=uX.prototype=new mM;JX.constructor=uX;kM(JX,j9.prototype);JX.isPureReactComponent=!0;var CM=Array.isArray,hM=Object.prototype.hasOwnProperty,ZX={current:null},xM={key:!0,ref:!0,__self:!0,__source:!0};function lM(f,Q,u){var J,Z={},Y=null,X=null;if(Q!=null)for(J in Q.ref!==void 0&&(X=Q.ref),Q.key!==void 0&&(Y=""+Q.key),Q)hM.call(Q,J)&&!xM.hasOwnProperty(J)&&(Z[J]=Q[J]);var q=arguments.length-2;if(q===1)Z.children=u;else if(1<q){for(var N=Array(q),U=0;U<q;U++)N[U]=arguments[U+2];Z.children=N}if(f&&f.defaultProps)for(J in q=f.defaultProps,q)Z[J]===void 0&&(Z[J]=q[J]);return{$$typeof:c4,type:f,key:Y,ref:X,props:Z,_owner:ZX.current}}function ZA(f,Q){return{$$typeof:c4,type:f.type,key:Q,ref:f.ref,props:f.props,_owner:f._owner}}function YX(f){return typeof f==="object"&&f!==null&&f.$$typeof===c4}function YA(f){var Q={"=":"=0",":":"=2"};return"$"+f.replace(/[=:]/g,function(u){return Q[u]})}var PM=/\/+/g;function QX(f,Q){return typeof f==="object"&&f!==null&&f.key!=null?YA(""+f.key):Q.toString(36)}function P7(f,Q,u,J,Z){var Y=typeof f;if(Y==="undefined"||Y==="boolean")f=null;var X=!1;if(f===null)X=!0;else switch(Y){case"string":case"number":X=!0;break;case"object":switch(f.$$typeof){case c4:case iI:X=!0}}if(X)return X=f,Z=Z(X),f=J===""?"."+QX(X,0):J,CM(Z)?(u="",f!=null&&(u=f.replace(PM,"$&/")+"/"),P7(Z,Q,u,"",function(U){return U})):Z!=null&&(YX(Z)&&(Z=ZA(Z,u+(!Z.key||X&&X.key===Z.key?"":(""+Z.key).replace(PM,"$&/")+"/")+f)),Q.push(Z)),1;if(X=0,J=J===""?".":J+":",CM(f))for(var q=0;q<f.length;q++){Y=f[q];var N=J+QX(Y,q);X+=P7(Y,Q,u,N,Z)}else if(N=JA(f),typeof N==="function")for(f=N.call(f),q=0;!(Y=f.next()).done;)Y=Y.value,N=J+QX(Y,q++),X+=P7(Y,Q,u,N,Z);else if(Y==="object")throw Q=String(f),Error("Objects are not valid as a React child (found: "+(Q==="[object Object]"?"object with keys {"+Object.keys(f).join(", ")+"}":Q)+"). If you meant to render a collection of children, use an array instead.");return X}function C7(f,Q,u){if(f==null)return f;var J=[],Z=0;return P7(f,J,"","",function(Y){return Q.call(u,Y,Z++)}),J}function XA(f){if(f._status===-1){var Q=f._result;Q=Q(),Q.then(function(u){if(f._status===0||f._status===-1)f._status=1,f._result=u},function(u){if(f._status===0||f._status===-1)f._status=2,f._result=u}),f._status===-1&&(f._status=0,f._result=Q)}if(f._status===1)return f._result.default;throw f._result}var j1={current:null},g7={transition:null},qA={ReactCurrentDispatcher:j1,ReactCurrentBatchConfig:g7,ReactCurrentOwner:ZX};function bM(){throw Error("act(...) is not supported in production builds of React.")}NA.Children={map:C7,forEach:function(f,Q,u){C7(f,function(){Q.apply(this,arguments)},u)},count:function(f){var Q=0;return C7(f,function(){Q++}),Q},toArray:function(f){return C7(f,function(Q){return Q})||[]},only:function(f){if(!YX(f))throw Error("React.Children.only expected to receive a single React element child.");return f}};NA.Component=j9;NA.Fragment=oI;NA.Profiler=tI;NA.PureComponent=uX;NA.StrictMode=rI;NA.Suspense=fA;NA.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED=qA;NA.act=bM;NA.cloneElement=function(f,Q,u){if(f===null||f===void 0)throw Error("React.cloneElement(...): The argument must be a React element, but you passed "+f+".");var J=kM({},f.props),Z=f.key,Y=f.ref,X=f._owner;if(Q!=null){if(Q.ref!==void 0&&(Y=Q.ref,X=ZX.current),Q.key!==void 0&&(Z=""+Q.key),f.type&&f.type.defaultProps)var q=f.type.defaultProps;for(N in Q)hM.call(Q,N)&&!xM.hasOwnProperty(N)&&(J[N]=Q[N]===void 0&&q!==void 0?q[N]:Q[N])}var N=arguments.length-2;if(N===1)J.children=u;else if(1<N){q=Array(N);for(var U=0;U<N;U++)q[U]=arguments[U+2];J.children=q}return{$$typeof:c4,type:f.type,key:Z,ref:Y,props:J,_owner:X}};NA.createContext=function(f){return f={$$typeof:aI,_currentValue:f,_currentValue2:f,_threadCount:0,Provider:null,Consumer:null,_defaultValue:null,_globalName:null},f.Provider={$$typeof:sI,_context:f},f.Consumer=f};NA.createElement=lM;NA.createFactory=function(f){var Q=lM.bind(null,f);return Q.type=f,Q};NA.createRef=function(){return{current:null}};NA.forwardRef=function(f){return{$$typeof:eI,render:f}};NA.isValidElement=YX;NA.lazy=function(f){return{$$typeof:uA,_payload:{_status:-1,_result:f},_init:XA}};NA.memo=function(f,Q){return{$$typeof:QA,type:f,compare:Q===void 0?null:Q}};NA.startTransition=function(f){var Q=g7.transition;g7.transition={};try{f()}finally{g7.transition=Q}};NA.unstable_act=bM;NA.useCallback=function(f,Q){return j1.current.useCallback(f,Q)};NA.useContext=function(f){return j1.current.useContext(f)};NA.useDebugValue=function(){};NA.useDeferredValue=function(f){return j1.current.useDeferredValue(f)};NA.useEffect=function(f,Q){return j1.current.useEffect(f,Q)};NA.useId=function(){return j1.current.useId()};NA.useImperativeHandle=function(f,Q,u){return j1.current.useImperativeHandle(f,Q,u)};NA.useInsertionEffect=function(f,Q){return j1.current.useInsertionEffect(f,Q)};NA.useLayoutEffect=function(f,Q){return j1.current.useLayoutEffect(f,Q)};NA.useMemo=function(f,Q){return j1.current.useMemo(f,Q)};NA.useReducer=function(f,Q,u){return j1.current.useReducer(f,Q,u)};NA.useRef=function(f){return j1.current.useRef(f)};NA.useState=function(f){return j1.current.useState(f)};NA.useSyncExternalStore=function(f,Q,u){return j1.current.useSyncExternalStore(f,Q,u)};NA.useTransition=function(){return j1.current.useTransition()};NA.version="18.3.1"});var oM=g((pA)=>{function qX(f,Q){var u=f.length;f.push(Q);f:for(;0<u;){var J=u-1>>>1,Z=f[J];if(0<k7(Z,Q))f[J]=Q,f[u]=Z,u=J;else break f}}function yf(f){return f.length===0?null:f[0]}function x7(f){if(f.length===0)return null;var Q=f[0],u=f.pop();if(u!==Q){f[0]=u;f:for(var J=0,Z=f.length,Y=Z>>>1;J<Y;){var X=2*(J+1)-1,q=f[X],N=X+1,U=f[N];if(0>k7(q,u))N<Z&&0>k7(U,q)?(f[J]=U,f[N]=u,J=N):(f[J]=q,f[X]=u,J=X);else if(N<Z&&0>k7(U,u))f[J]=U,f[N]=u,J=N;else break f}}return Q}function k7(f,Q){var u=f.sortIndex-Q.sortIndex;return u!==0?u:f.id-Q.id}if(typeof performance==="object"&&typeof performance.now==="function")NX=performance,pA.unstable_now=function(){return NX.now()};else j7=Date,UX=j7.now(),pA.unstable_now=function(){return j7.now()-UX};var NX,j7,UX,F8=[],e8=[],dA=1,Kf=null,R1=3,l7=!1,x6=!1,p4=!1,_M=typeof setTimeout==="function"?setTimeout:null,cM=typeof clearTimeout==="function"?clearTimeout:null,yM=typeof setImmediate<"u"?setImmediate:null;typeof navigator<"u"&&navigator.scheduling!==void 0&&navigator.scheduling.isInputPending!==void 0&&navigator.scheduling.isInputPending.bind(navigator.scheduling);function FX(f){for(var Q=yf(e8);Q!==null;){if(Q.callback===null)x7(e8);else if(Q.startTime<=f)x7(e8),Q.sortIndex=Q.expirationTime,qX(F8,Q);else break;Q=yf(e8)}}function MX(f){if(p4=!1,FX(f),!x6)if(yf(F8)!==null)x6=!0,HX(WX);else{var Q=yf(e8);Q!==null&&zX(MX,Q.startTime-f)}}function WX(f,Q){x6=!1,p4&&(p4=!1,cM(i4),i4=-1),l7=!0;var u=R1;try{FX(Q);for(Kf=yf(F8);Kf!==null&&(!(Kf.expirationTime>Q)||f&&!iM());){var J=Kf.callback;if(typeof J==="function"){Kf.callback=null,R1=Kf.priorityLevel;var Z=J(Kf.expirationTime<=Q);Q=pA.unstable_now(),typeof Z==="function"?Kf.callback=Z:Kf===yf(F8)&&x7(F8),FX(Q)}else x7(F8);Kf=yf(F8)}if(Kf!==null)var Y=!0;else{var X=yf(e8);X!==null&&zX(MX,X.startTime-Q),Y=!1}return Y}finally{Kf=null,R1=u,l7=!1}}var b7=!1,m7=null,i4=-1,dM=5,pM=-1;function iM(){return pA.unstable_now()-pM<dM?!1:!0}function XX(){if(m7!==null){var f=pA.unstable_now();pM=f;var Q=!0;try{Q=m7(!0,f)}finally{Q?d4():(b7=!1,m7=null)}}else b7=!1}var d4;if(typeof yM==="function")d4=function(){yM(XX)};else if(typeof MessageChannel<"u")h7=new MessageChannel,GX=h7.port2,h7.port1.onmessage=XX,d4=function(){GX.postMessage(null)};else d4=function(){_M(XX,0)};var h7,GX;function HX(f){m7=f,b7||(b7=!0,d4())}function zX(f,Q){i4=_M(function(){f(pA.unstable_now())},Q)}pA.unstable_IdlePriority=5;pA.unstable_ImmediatePriority=1;pA.unstable_LowPriority=4;pA.unstable_NormalPriority=3;pA.unstable_Profiling=null;pA.unstable_UserBlockingPriority=2;pA.unstable_cancelCallback=function(f){f.callback=null};pA.unstable_continueExecution=function(){x6||l7||(x6=!0,HX(WX))};pA.unstable_forceFrameRate=function(f){0>f||125<f?console.error("forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported"):dM=0<f?Math.floor(1000/f):5};pA.unstable_getCurrentPriorityLevel=function(){return R1};pA.unstable_getFirstCallbackNode=function(){return yf(F8)};pA.unstable_next=function(f){switch(R1){case 1:case 2:case 3:var Q=3;break;default:Q=R1}var u=R1;R1=Q;try{return f()}finally{R1=u}};pA.unstable_pauseExecution=function(){};pA.unstable_requestPaint=function(){};pA.unstable_runWithPriority=function(f,Q){switch(f){case 1:case 2:case 3:case 4:case 5:break;default:f=3}var u=R1;R1=f;try{return Q()}finally{R1=u}};pA.unstable_scheduleCallback=function(f,Q,u){var J=pA.unstable_now();switch(typeof u==="object"&&u!==null?(u=u.delay,u=typeof u==="number"&&0<u?J+u:J):u=J,f){case 1:var Z=-1;break;case 2:Z=250;break;case 5:Z=1073741823;break;case 4:Z=1e4;break;default:Z=5000}return Z=u+Z,f={id:dA++,callback:Q,priorityLevel:f,startTime:u,expirationTime:Z,sortIndex:-1},u>J?(f.sortIndex=u,qX(e8,f),yf(F8)===null&&f===yf(e8)&&(p4?(cM(i4),i4=-1):p4=!0,zX(MX,u-J))):(f.sortIndex=Z,qX(F8,f),x6||l7||(x6=!0,HX(WX))),f};pA.unstable_shouldYield=iM;pA.unstable_wrapCallback=function(f){var Q=R1;return function(){var u=R1;R1=Q;try{return f.apply(this,arguments)}finally{R1=u}}}});var wN={};AM(wN,{version:()=>N3,unstable_renderSubtreeIntoContainer:()=>q3,unstable_batchedUpdates:()=>X3,unmountComponentAtNode:()=>Y3,render:()=>Z3,hydrateRoot:()=>J3,hydrate:()=>u3,flushSync:()=>Q3,findDOMNode:()=>f3,createRoot:()=>ez,createPortal:()=>az,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:()=>sz});function s(f){for(var Q="https://reactjs.org/docs/error-decoder.html?invariant="+f,u=1;u<arguments.length;u++)Q+="&args[]="+encodeURIComponent(arguments[u]);return"Minified React error #"+f+"; visit "+Q+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}function e6(f,Q){ZQ(f,Q),ZQ(f+"Capture",Q)}function ZQ(f,Q){K2[f]=Q;for(f=0;f<Q.length;f++)fH.add(Q[f])}function Mv(f){if(mX.call(tM,f))return!0;if(mX.call(rM,f))return!1;if(Gv.test(f))return tM[f]=!0;return rM[f]=!0,!1}function Wv(f,Q,u,J){if(u!==null&&u.type===0)return!1;switch(typeof Q){case"function":case"symbol":return!0;case"boolean":if(J)return!1;if(u!==null)return!u.acceptsBooleans;return f=f.toLowerCase().slice(0,5),f!=="data-"&&f!=="aria-";default:return!1}}function Hv(f,Q,u,J){if(Q===null||typeof Q>"u"||Wv(f,Q,u,J))return!0;if(J)return!1;if(u!==null)switch(u.type){case 3:return!Q;case 4:return Q===!1;case 5:return isNaN(Q);case 6:return isNaN(Q)||1>Q}return!1}function x1(f,Q,u,J,Z,Y,X){this.acceptsBooleans=Q===2||Q===3||Q===4,this.attributeName=J,this.attributeNamespace=Z,this.mustUseProperty=u,this.propertyName=f,this.type=Q,this.sanitizeURL=Y,this.removeEmptyString=X}function Cq(f){return f[1].toUpperCase()}function Pq(f,Q,u,J){var Z=O1.hasOwnProperty(Q)?O1[Q]:null;if(Z!==null?Z.type!==0:J||!(2<Q.length)||Q[0]!=="o"&&Q[0]!=="O"||Q[1]!=="n"&&Q[1]!=="N")Hv(Q,u,Z,J)&&(u=null),J||Z===null?Mv(Q)&&(u===null?f.removeAttribute(Q):f.setAttribute(Q,""+u)):Z.mustUseProperty?f[Z.propertyName]=u===null?Z.type===3?!1:"":u:(Q=Z.attributeName,J=Z.attributeNamespace,u===null?f.removeAttribute(Q):(Z=Z.type,u=Z===3||Z===4&&u===!0?"":""+u,J?f.setAttributeNS(J,Q,u):f.setAttribute(Q,u)))}function o4(f){if(f===null||typeof f!=="object")return null;return f=sM&&f[sM]||f["@@iterator"],typeof f==="function"?f:null}function Q2(f){if(DX===void 0)try{throw Error()}catch(u){var Q=u.stack.trim().match(/\n( *(at )?)/);DX=Q&&Q[1]||""}return`
 `+DX+f}function KX(f,Q){if(!f||VX)return"";VX=!0;var u=Error.prepareStackTrace;Error.prepareStackTrace=void 0;try{if(Q)if(Q=function(){throw Error()},Object.defineProperty(Q.prototype,"props",{set:function(){throw Error()}}),typeof Reflect==="object"&&Reflect.construct){try{Reflect.construct(Q,[])}catch(U){var J=U}Reflect.construct(f,[],Q)}else{try{Q.call()}catch(U){J=U}f.call(Q.prototype)}else{try{throw Error()}catch(U){J=U}f()}}catch(U){if(U&&J&&typeof U.stack==="string"){for(var Z=U.stack.split(`
