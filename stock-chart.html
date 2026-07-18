@@ -210,7 +210,25 @@
                 'ARMON': 'IDX:ARMON'
             };
 
-            const symbol = symbolMap[currentStock] || `IDX:${currentStock}`;
+            // Determine the symbol with proper exchange prefix
+            let symbol = symbolMap[currentStock];
+
+            if (!symbol) {
+                // If not in map, determine exchange based on code characteristics
+                if (currentStock.includes('.')) {
+                    // Has exchange suffix like .JK
+                    symbol = `IDX:${currentStock.split('.')[0]}`;
+                } else if (currentStock.length <= 3) {
+                    // Short codes like USD, XAU are likely commodities/forex
+                    symbol = currentStock;
+                } else if (currentStock.length <= 5 && currentStock.match(/^[A-Z]+$/)) {
+                    // 4-5 char codes without . are likely US stocks
+                    symbol = `NASDAQ:${currentStock}`;
+                } else {
+                    // Default to IDX for unknown Indonesian stocks
+                    symbol = `IDX:${currentStock}`;
+                }
+            }
 
             // Clear the container
             const container = document.getElementById('tradingview_chart');
