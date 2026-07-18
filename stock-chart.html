@@ -145,7 +145,6 @@
 
     <script>
         let currentStock = 'BSML';
-        let widget = null;
 
         // Get stock code from URL parameter
         const params = new URLSearchParams(window.location.search);
@@ -170,29 +169,46 @@
 
             const symbol = symbolMap[currentStock] || `IDX:${currentStock}`;
 
-            // Remove existing widget if any
-            if (widget) {
-                widget.remove();
+            // Clear the container
+            const container = document.getElementById('tradingview_chart');
+            if (container) {
+                container.innerHTML = '';
             }
 
-            // Create TradingView chart widget
-            new TradingView.widget({
-                "autosize": true,
-                "symbol": symbol,
-                "interval": "D",
-                "timezone": "Asia/Jakarta",
-                "theme": "dark",
-                "style": "1",
-                "locale": "en",
-                "toolbar_bg": "#f1f3f6",
-                "enable_publishing": false,
-                "allow_symbol_change": false,
-                "container_id": "tradingview_chart"
-            });
+            // Wait for TradingView to be available
+            if (typeof TradingView !== 'undefined') {
+                try {
+                    // Create TradingView chart widget
+                    new TradingView.widget({
+                        "autosize": true,
+                        "symbol": symbol,
+                        "interval": "D",
+                        "timezone": "Asia/Jakarta",
+                        "theme": "dark",
+                        "style": "1",
+                        "locale": "en",
+                        "toolbar_bg": "#f1f3f6",
+                        "enable_publishing": false,
+                        "allow_symbol_change": false,
+                        "container_id": "tradingview_chart"
+                    });
+                } catch (error) {
+                    console.error('Error loading TradingView widget:', error);
+                    container.innerHTML = '<p style="color: #ff6b6b; padding: 20px;">Error loading chart. Please refresh the page.</p>';
+                }
+            } else {
+                // Retry if TradingView not loaded yet
+                setTimeout(initializeTradingViewChart, 500);
+            }
         }
 
-        // Initialize chart when page loads
-        document.addEventListener('DOMContentLoaded', initializeTradingViewChart);
+        // Initialize when TradingView library loads
+        window.addEventListener('load', initializeTradingViewChart);
+
+        // Also try on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initializeTradingViewChart, 1000);
+        });
     </script>
 </body>
 </html>
