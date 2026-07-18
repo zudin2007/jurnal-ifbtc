@@ -158,13 +158,56 @@
         }
 
         function initializeTradingViewChart() {
-            // Map Indonesian stock codes to TradingView symbols
+            // Map stock codes to TradingView symbols
             const symbolMap = {
+                // Indonesian stocks (IDX)
                 'BBCA': 'IDX:BBCA',
                 'BBHI': 'IDX:BBHI',
                 'BBNI': 'IDX:BBNI',
                 'BBRI': 'IDX:BBRI',
-                'BNBA': 'IDX:BNBA'
+                'BNBA': 'IDX:BNBA',
+                'TLKM': 'IDX:TLKM',
+                'BMRI': 'IDX:BMRI',
+                'AADI': 'IDX:AADI',
+                'APLN': 'IDX:APLN',
+                'INDF': 'IDX:INDF',
+                'ADRO': 'IDX:ADRO',
+                'HRTA': 'IDX:HRTA',
+                'BEST': 'IDX:BEST',
+                'DILD': 'IDX:DILD',
+                'BMTR': 'IDX:BMTR',
+                'SRIL': 'IDX:SRIL',
+                'ADMG': 'IDX:ADMG',
+                'CFIN': 'IDX:CFIN',
+                'RALS': 'IDX:RALS',
+                'SIMP': 'IDX:SIMP',
+                'MAIN': 'IDX:MAIN',
+                'PNIN': 'IDX:PNIN',
+                'GJTL': 'IDX:GJTL',
+                'LSIP': 'IDX:LSIP',
+                'ABMM': 'IDX:ABMM',
+                // US Stocks
+                'PANW': 'NASDAQ:PANW',
+                'CRWD': 'NASDAQ:CRWD',
+                'FTNT': 'NASDAQ:FTNT',
+                'OKTA': 'NASDAQ:OKTA',
+                'ZS': 'NASDAQ:ZS',
+                'NVDA': 'NASDAQ:NVDA',
+                'KO': 'NYSE:KO',
+                'CB': 'NYSE:CB',
+                'USD': 'FX_IDC:USDIDR',
+                'LRCX': 'NASDAQ:LRCX',
+                'STX': 'NASDAQ:STX',
+                'WDC': 'NASDAQ:WDC',
+                'CAT': 'NYSE:CAT',
+                'MU': 'NASDAQ:MU',
+                'AMD': 'NASDAQ:AMD',
+                'ANET': 'NYSE:ANET',
+                // Crypto
+                'BTC': 'BITSTAMP:BTCUSD',
+                'XAU': 'OANDA:XAUUSD',
+                'ORCLON': 'IDX:ORCLON',
+                'ARMON': 'IDX:ARMON'
             };
 
             const symbol = symbolMap[currentStock] || `IDX:${currentStock}`;
