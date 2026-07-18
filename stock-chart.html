@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Chart</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://s3.tradingview.com/tv.js"></script>
     <style>
         * {
             margin: 0;
@@ -77,11 +77,6 @@
             border: 1px solid var(--border-color);
         }
 
-        .chart-wrapper {
-            position: relative;
-            height: 400px;
-            margin-bottom: 20px;
-        }
 
         .stats {
             display: grid;
@@ -116,33 +111,6 @@
             color: #FF4D4D;
         }
 
-        .controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .time-btn {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-        }
-
-        .time-btn.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .time-btn:hover {
-            border-color: var(--accent);
-        }
 
         footer {
             text-align: center;
@@ -152,19 +120,6 @@
             border-top: 1px solid var(--border-color);
         }
 
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
-        }
-
-        .error {
-            background: #FF4D4D;
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
@@ -178,23 +133,7 @@
         </header>
 
         <div class="chart-container">
-            <div class="controls">
-                <button class="time-btn active" onclick="loadChart('1m')">1 Bulan</button>
-                <button class="time-btn" onclick="loadChart('3m')">3 Bulan</button>
-                <button class="time-btn" onclick="loadChart('6m')">6 Bulan</button>
-                <button class="time-btn" onclick="loadChart('1y')">1 Tahun</button>
-            </div>
-
-            <div id="errorMessage" style="display: none;" class="error"></div>
-
-            <div id="loadingMessage" class="loading" style="display: none;">
-                ⏳ Loading chart data...
-            </div>
-
-            <div class="chart-wrapper" id="chartWrapper" style="display: none;">
-                <canvas id="stockChart"></canvas>
-            </div>
-
+            <div id="tradingview_chart" style="height: 500px; width: 100%;"></div>
             <div class="stats" id="statsContainer"></div>
         </div>
 
@@ -205,9 +144,8 @@
     </div>
 
     <script>
-        let chart = null;
         let currentStock = 'BSML';
-        let currentPeriod = '1m';
+        let widget = null;
 
         // Get stock code from URL parameter
         const params = new URLSearchParams(window.location.search);
@@ -217,216 +155,46 @@
         }
 
         function goBack() {
-            window.history.back();
+            window.location.href = 'dashboard.html';
         }
 
-        function showError(message) {
-            const errorDiv = document.getElementById('errorMessage');
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
-        }
+        function initializeTradingViewChart() {
+            // Map Indonesian stock codes to TradingView symbols
+            const symbolMap = {
+                'BSML': 'IDX:BSML',
+                'MKAP': 'IDX:MKAP',
+                'ADES': 'IDX:ADES',
+                'GULA': 'IDX:GULA',
+                'MARK': 'IDX:MARK',
+                'CASA': 'IDX:CASA',
+                'NEST': 'IDX:NEST'
+            };
 
-        function hideError() {
-            document.getElementById('errorMessage').style.display = 'none';
-        }
+            const symbol = symbolMap[currentStock] || `IDX:${currentStock}`;
 
-        function showLoading(show = true) {
-            document.getElementById('loadingMessage').style.display = show ? 'block' : 'none';
-            document.getElementById('chartWrapper').style.display = show ? 'none' : 'block';
-        }
+            // Remove existing widget if any
+            if (widget) {
+                widget.remove();
+            }
 
-        function updateTimeButtons(selected) {
-            document.querySelectorAll('.time-btn').forEach(btn => {
-                btn.classList.remove('active');
+            // Create TradingView chart widget
+            new TradingView.widget({
+                "autosize": true,
+                "symbol": symbol,
+                "interval": "D",
+                "timezone": "Asia/Jakarta",
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "toolbar_bg": "#f1f3f6",
+                "enable_publishing": false,
+                "allow_symbol_change": false,
+                "container_id": "tradingview_chart"
             });
-            event.target.classList.add('active');
         }
 
-        async function loadChart(period) {
-            currentPeriod = period;
-            updateTimeButtons(period);
-            showLoading(true);
-            hideError();
-
-            try {
-                // Generate mock historical data for demonstration
-                const chartData = generateMockData(period);
-                displayChart(chartData);
-                displayStats();
-                showLoading(false);
-            } catch (error) {
-                showError(`Error loading chart: ${error.message}`);
-                showLoading(false);
-            }
-        }
-
-        function generateMockData(period) {
-            const labels = [];
-            const prices = [];
-            const now = new Date();
-            let days = 30;
-
-            if (period === '3m') days = 90;
-            else if (period === '6m') days = 180;
-            else if (period === '1y') days = 365;
-
-            // Generate historical data
-            for (let i = days; i > 0; i--) {
-                const date = new Date(now);
-                date.setDate(date.getDate() - i);
-                labels.push(date.toLocaleDateString('id-ID', { month: 'short', day: 'numeric' }));
-
-                // Generate realistic-looking price data
-                const basePrice = 500 + Math.sin(i / 20) * 100 + Math.random() * 50;
-                prices.push(Math.round(basePrice));
-            }
-
-            return { labels, prices };
-        }
-
-        function displayChart(data) {
-            const canvas = document.getElementById('stockChart');
-            const ctx = canvas.getContext('2d');
-
-            if (chart) {
-                chart.destroy();
-            }
-
-            const minPrice = Math.min(...data.prices);
-            const maxPrice = Math.max(...data.prices);
-            const change = data.prices[data.prices.length - 1] - data.prices[0];
-            const changePercent = (change / data.prices[0] * 100).toFixed(2);
-
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: data.labels,
-                    datasets: [{
-                        label: `${currentStock} Price`,
-                        data: data.prices,
-                        borderColor: changePercent >= 0 ? '#00E676' : '#FF4D4D',
-                        backgroundColor: changePercent >= 0 ? 'rgba(0, 230, 118, 0.1)' : 'rgba(255, 77, 77, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.4,
-                        pointRadius: 0,
-                        pointHoverRadius: 6,
-                        pointBackgroundColor: changePercent >= 0 ? '#00E676' : '#FF4D4D',
-                        pointBorderColor: '#fff',
-                        pointBorderWidth: 2,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            labels: {
-                                color: '#f0f0f0',
-                                font: {
-                                    size: 12,
-                                    family: "Inter, ui-sans-serif, system-ui"
-                                }
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            padding: 12,
-                            titleColor: '#f0f0f0',
-                            bodyColor: '#f0f0f0',
-                            borderColor: '#FF7A00',
-                            borderWidth: 1,
-                            callbacks: {
-                                label: function(context) {
-                                    return `Rp ${context.parsed.y.toLocaleString('id-ID')}`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.05)',
-                                drawBorder: false
-                            },
-                            ticks: {
-                                color: '#b0b0b0',
-                                font: {
-                                    size: 11,
-                                    family: "Inter, ui-sans-serif, system-ui"
-                                },
-                                maxTicksLimit: 8
-                            }
-                        },
-                        y: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.05)',
-                                drawBorder: false
-                            },
-                            ticks: {
-                                color: '#b0b0b0',
-                                font: {
-                                    size: 11,
-                                    family: "Inter, ui-sans-serif, system-ui"
-                                },
-                                callback: function(value) {
-                                    return 'Rp ' + value.toLocaleString('id-ID');
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-            canvas.chart = chart;
-        }
-
-        function displayStats() {
-            try {
-                const canvas = document.getElementById('stockChart');
-                if (!canvas || !canvas.chart) return;
-
-                const chartInstance = canvas.chart;
-                const prices = chartInstance.data.datasets[0].data;
-
-                if (!prices || prices.length === 0) return;
-
-                const currentPrice = prices[prices.length - 1];
-                const previousPrice = prices[0];
-                const change = currentPrice - previousPrice;
-                const changePercent = (change / previousPrice * 100).toFixed(2);
-                const minPrice = Math.min(...prices);
-                const maxPrice = Math.max(...prices);
-
-                const statsHTML = `
-                    <div class="stat-box">
-                        <div class="stat-label">Current Price</div>
-                        <div class="stat-value">Rp ${currentPrice.toLocaleString('id-ID')}</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Change</div>
-                        <div class="stat-value ${change >= 0 ? 'positive' : 'negative'}">
-                            ${change >= 0 ? '+' : ''}Rp ${Math.abs(change).toLocaleString('id-ID')} (${changePercent}%)
-                        </div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Highest Price</div>
-                        <div class="stat-value">Rp ${maxPrice.toLocaleString('id-ID')}</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Lowest Price</div>
-                        <div class="stat-value">Rp ${minPrice.toLocaleString('id-ID')}</div>
-                    </div>
-                `;
-
-                document.getElementById('statsContainer').innerHTML = statsHTML;
-            } catch (error) {
-                console.error('Stats error:', error);
-            }
-        }
-
-        // Load initial chart
-        loadChart('1m');
+        // Initialize chart when page loads
+        document.addEventListener('DOMContentLoaded', initializeTradingViewChart);
     </script>
 </body>
 </html>
