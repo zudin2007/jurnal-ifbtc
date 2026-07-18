@@ -1,7 +1,6 @@
 {
   "name": "Jurnal IFBTC",
   "version": 2,
-  "public": true,
   "buildCommand": "",
   "devCommand": "npx http-server -p 3000",
   "installCommand": "",
