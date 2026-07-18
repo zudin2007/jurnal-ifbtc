@@ -147,38 +147,72 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   <script>
     function enableStockChartClicks() {
       const stockCodePattern = /^[A-Z]{4,5}$/;
+      const clickedCodes = new Set();
 
+      // Use capture phase to catch all clicks
       document.addEventListener('click', (e) => {
         let target = e.target;
-        while (target && target !== document) {
+        let found = false;
+
+        // Walk up the DOM tree to find a stock code
+        while (target && target !== document && !found) {
           const text = target.textContent?.trim();
-          if (text && stockCodePattern.test(text) && text !== 'LIVE' && target.children.length === 0) {
-            e.preventDefault();
-            window.open(`stock-chart.html?code=${text}`, '_blank');
-            break;
+
+          // Check if this element contains a stock code
+          if (text && stockCodePattern.test(text) && text !== 'LIVE') {
+            // Only if it's a leaf node (no children) or text node
+            if (target.children.length === 0 || target.childNodes.length === 1) {
+              window.open(`stock-chart.html?code=${text}`, '_blank');
+              found = true;
+              break;
+            }
           }
           target = target.parentElement;
         }
-      });
+      }, true);
 
-      setTimeout(() => {
+      // Mark all stock codes as clickable with visual feedback
+      function markStockCodes() {
         document.querySelectorAll('*').forEach(el => {
           const text = el.textContent?.trim();
-          if (text && el.children.length === 0 && stockCodePattern.test(text) && text !== 'LIVE' &&
-              el.offsetHeight < 50 && el.offsetWidth < 100) {
-            el.style.cursor = 'pointer';
-            el.style.userSelect = 'none';
-            el.addEventListener('mouseenter', () => {
-              el.style.opacity = '0.7';
-              el.style.textDecoration = 'underline';
-            });
-            el.addEventListener('mouseleave', () => {
-              el.style.opacity = '1';
-              el.style.textDecoration = 'none';
-            });
+
+          // Check if element contains only a stock code
+          if (text && stockCodePattern.test(text) && text !== 'LIVE') {
+            // Only mark if it's a small element (not a container)
+            if ((el.offsetHeight < 50 && el.offsetWidth < 150) || el.children.length === 0) {
+              if (!clickedCodes.has(el)) {
+                clickedCodes.add(el);
+                el.style.cursor = 'pointer';
+                el.style.userSelect = 'none';
+                el.style.transition = 'opacity 0.2s, text-decoration 0.2s';
+
+                el.addEventListener('mouseenter', function() {
+                  this.style.opacity = '0.7';
+                  this.style.textDecoration = 'underline';
+                });
+
+                el.addEventListener('mouseleave', function() {
+                  this.style.opacity = '1';
+                  this.style.textDecoration = 'none';
+                });
+              }
+            }
           }
         });
-      }, 500);
+      }
+
+      // Mark codes on page load
+      markStockCodes();
+
+      // Re-mark codes when page updates (for React)
+      const observer = new MutationObserver(() => {
+        markStockCodes();
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
     }
 
     if (document.readyState === 'loading') {
