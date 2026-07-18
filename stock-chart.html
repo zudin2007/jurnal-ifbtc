@@ -145,7 +145,6 @@
 
     <script>
         let currentStock = 'BSML';
-        let widget = null;
 
         // Get stock code from URL parameter
         const params = new URLSearchParams(window.location.search);
@@ -159,42 +158,118 @@
         }
 
         function initializeTradingViewChart() {
-            // Map Indonesian stock codes to TradingView symbols
+            // Map stock codes to TradingView symbols
             const symbolMap = {
-                'BSML': 'IDX:BSML',
-                'MKAP': 'IDX:MKAP',
-                'ADES': 'IDX:ADES',
-                'GULA': 'IDX:GULA',
-                'MARK': 'IDX:MARK',
-                'CASA': 'IDX:CASA',
-                'NEST': 'IDX:NEST'
+                // Indonesian stocks (IDX)
+                'BBCA': 'IDX:BBCA',
+                'BBHI': 'IDX:BBHI',
+                'BBNI': 'IDX:BBNI',
+                'BBRI': 'IDX:BBRI',
+                'BNBA': 'IDX:BNBA',
+                'TLKM': 'IDX:TLKM',
+                'BMRI': 'IDX:BMRI',
+                'AADI': 'IDX:AADI',
+                'APLN': 'IDX:APLN',
+                'INDF': 'IDX:INDF',
+                'ADRO': 'IDX:ADRO',
+                'HRTA': 'IDX:HRTA',
+                'BEST': 'IDX:BEST',
+                'DILD': 'IDX:DILD',
+                'BMTR': 'IDX:BMTR',
+                'SRIL': 'IDX:SRIL',
+                'ADMG': 'IDX:ADMG',
+                'CFIN': 'IDX:CFIN',
+                'RALS': 'IDX:RALS',
+                'SIMP': 'IDX:SIMP',
+                'MAIN': 'IDX:MAIN',
+                'PNIN': 'IDX:PNIN',
+                'GJTL': 'IDX:GJTL',
+                'LSIP': 'IDX:LSIP',
+                'ABMM': 'IDX:ABMM',
+                // US Stocks
+                'PANW': 'NASDAQ:PANW',
+                'CRWD': 'NASDAQ:CRWD',
+                'FTNT': 'NASDAQ:FTNT',
+                'OKTA': 'NASDAQ:OKTA',
+                'ZS': 'NASDAQ:ZS',
+                'NVDA': 'NASDAQ:NVDA',
+                'KO': 'NYSE:KO',
+                'CB': 'NYSE:CB',
+                'USD': 'FX_IDC:USDIDR',
+                'LRCX': 'NASDAQ:LRCX',
+                'STX': 'NASDAQ:STX',
+                'WDC': 'NASDAQ:WDC',
+                'CAT': 'NYSE:CAT',
+                'MU': 'NASDAQ:MU',
+                'AMD': 'NASDAQ:AMD',
+                'ANET': 'NYSE:ANET',
+                // Crypto
+                'BTC': 'BINANCE:BTCUSDT',
+                'XAU': 'NYMEX:GC1!',
+                'ORCLON': 'IDX:ORCLON',
+                'ARMON': 'IDX:ARMON'
             };
 
-            const symbol = symbolMap[currentStock] || `IDX:${currentStock}`;
+            // Determine the symbol with proper exchange prefix
+            let symbol = symbolMap[currentStock];
 
-            // Remove existing widget if any
-            if (widget) {
-                widget.remove();
+            if (!symbol) {
+                // If not in map, determine exchange based on code characteristics
+                if (currentStock.includes('.')) {
+                    // Has exchange suffix like .JK
+                    symbol = `IDX:${currentStock.split('.')[0]}`;
+                } else if (currentStock.length <= 3) {
+                    // Short codes like USD, XAU are likely commodities/forex
+                    symbol = currentStock;
+                } else if (currentStock.length <= 5 && currentStock.match(/^[A-Z]+$/)) {
+                    // 4-5 char codes without . are likely US stocks
+                    symbol = `NASDAQ:${currentStock}`;
+                } else {
+                    // Default to IDX for unknown Indonesian stocks
+                    symbol = `IDX:${currentStock}`;
+                }
             }
 
-            // Create TradingView chart widget
-            new TradingView.widget({
-                "autosize": true,
-                "symbol": symbol,
-                "interval": "D",
-                "timezone": "Asia/Jakarta",
-                "theme": "dark",
-                "style": "1",
-                "locale": "en",
-                "toolbar_bg": "#f1f3f6",
-                "enable_publishing": false,
-                "allow_symbol_change": false,
-                "container_id": "tradingview_chart"
-            });
+            // Clear the container
+            const container = document.getElementById('tradingview_chart');
+            if (container) {
+                container.innerHTML = '';
+            }
+
+            // Wait for TradingView to be available
+            if (typeof TradingView !== 'undefined') {
+                try {
+                    // Create TradingView chart widget
+                    new TradingView.widget({
+                        "autosize": true,
+                        "symbol": symbol,
+                        "interval": "D",
+                        "timezone": "Asia/Jakarta",
+                        "theme": "dark",
+                        "style": "1",
+                        "locale": "en",
+                        "toolbar_bg": "#f1f3f6",
+                        "enable_publishing": false,
+                        "allow_symbol_change": false,
+                        "container_id": "tradingview_chart"
+                    });
+                } catch (error) {
+                    console.error('Error loading TradingView widget:', error);
+                    container.innerHTML = '<p style="color: #ff6b6b; padding: 20px;">Error loading chart. Please refresh the page.</p>';
+                }
+            } else {
+                // Retry if TradingView not loaded yet
+                setTimeout(initializeTradingViewChart, 500);
+            }
         }
 
-        // Initialize chart when page loads
-        document.addEventListener('DOMContentLoaded', initializeTradingViewChart);
+        // Initialize when TradingView library loads
+        window.addEventListener('load', initializeTradingViewChart);
+
+        // Also try on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initializeTradingViewChart, 1000);
+        });
     </script>
 </body>
 </html>
