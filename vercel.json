@@ -1,5 +1,14 @@
 {
   "buildCommand": "",
   "installCommand": "",
-  "framework": "html"
+  "framework": "html",
+  "public": true,
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/home.html"
+    }
+  ]
 }
