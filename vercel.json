@@ -1,14 +1,15 @@
 {
   "buildCommand": "",
   "installCommand": "",
-  "framework": "html",
-  "public": true,
-  "cleanUrls": false,
-  "trailingSlash": false,
-  "redirects": [
+  "framework": null,
+  "rewrites": [
     {
       "source": "/",
-      "destination": "/home.html"
+      "destination": "/index.html"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/:path*"
     }
   ]
 }
